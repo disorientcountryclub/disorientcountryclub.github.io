@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Disorient presents: COUNTRY CLUB XII - POSSIBILITIES OF PATTERN</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="90.3 WDCC Radio Disorient">
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lexend%20Exa">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+    body {
+        font-family: "Verdana", sans-serif
+    }
+
+    .mySlides {
+        display: none
+    }
+</style>
+
+<body style="background-color:#000000">
+    <div class="w3-content" style="max-width:2000px; margin-top:46px">
+        <center>
+            <div>
+                <img src="assets/WDCC.jpg" alt="disorient country club" width="50%">
+                <p color=#fcc400>90.3 WDCC RADIO DISORIENT</p>
+            </div>
+            <div id="radio_container" class="center">
+                <audio id="audioplayer" xmlns="http://www.w3.org/1999/xhtml" controls="controls" preload="false"
+                    autoplay="false">
+                    <source id="ogg_source" src="https://stream.newdayseve.org/100_3_WLOV_ogg?v=1684152712856"
+                        type="audio/ogg">
+                    <source id="mp3_source" src="https://stream.newdayseve.org/100_3_WLOV_mp3?v=1684152712856"
+                        type="audio/mpeg">
+                </audio>
+
+                <BR>2024 THEME: POSSIBILITIES OF PATTERN</h3>
+            </div>
+        </center>
+        <!-- Footer -->
+        <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-black w3-xlarge">
+
+            <a href="https://www.facebook.com/events/602183435079006/?active_tab=discussion"><i
+                    class="fa fa-facebook-official w3-hover-opacity"></i></a>
+            <a href="https://www.instagram.com/dis.ori.ent/">
+                <i class="fa fa-instagram w3-hover-opacity"></i>
+            </a>
+            <a href="https://www.twitch.tv/disorientlovesyou">
+                <i class="fa fa-twitch w3-hover-opacity"></i>
+            </a>
+
+
+            <p class="w3-medium"> <a href="http://www.disorient.info" target="_blank">DISORIENT</a></p>
+        </footer>
+    </div>
+    <script>
+        // Automatic Slideshow - change image every 4 seconds
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 4000);
+        }
+
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function myFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        var modal = document.getElementById('ticketModal');
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
