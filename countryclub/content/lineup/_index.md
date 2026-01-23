@@ -2,7 +2,9 @@
 title: "Lineup"
 ---
 
-Check out the amazing performers at Country Club!
+Country Club is a participatory and interactive experience.
 
-- [DJ Lineup](/lineup/djs/)
-- [VJ Lineup](/lineup/vjs/)
+Sign up to perform here: TODO
+
+<!-- - [DJ Lineup](/lineup/djs/)
+- [VJ Lineup](/lineup/vjs/) -->

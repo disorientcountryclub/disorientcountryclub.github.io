@@ -2,4 +2,6 @@
 title: "Art Installations"
 ---
 
-Explore the incredible art installations at Country Club XIII - Materials of Intrigue.
+The following art installations are registered for Country Club XIV - Presence and the Eternal Now.
+
+Register yours here: TODO
