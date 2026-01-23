@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Guides on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</title>
-    <link>https://disorientcountry.club/guide/</link>
+    <link>http://localhost:1313/guide/</link>
     <description>Recent content in Guides on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://disorientcountry.club/guide/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/guide/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FAQ</title>
-      <link>https://disorientcountry.club/guide/faq/</link>
+      <link>http://localhost:1313/guide/faq/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://disorientcountry.club/guide/faq/</guid>
+      <guid>http://localhost:1313/guide/faq/</guid>
       <description>&lt;h2 id=&#34;where-exactly-is-this&#34;&gt;Where Exactly Is This?&lt;/h2&gt;&#xA;&lt;p&gt;Upstate New York, 2 1/2 hours north of NYC. Location released to ticketholders week of event.&lt;/p&gt;&#xA;&lt;h2 id=&#34;can-i-leave-and-come-back&#34;&gt;Can I Leave and Come Back?&lt;/h2&gt;&#xA;&lt;p&gt;Yes, but the gate will be closed overnight. Check gate hours for available in/out hours.&lt;/p&gt;&#xA;&lt;h2 id=&#34;i-need-to-resell-my-ticket-is-it-possible&#34;&gt;I Need to Resell My Ticket, Is It Possible?&lt;/h2&gt;&#xA;&lt;p&gt;Yes! You can sell or reassign your ticket to someone else.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://help.humanitix.com/en/articles/9539834-how-to-resell-your-ticket&#34;&gt;Sell my ticket&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://help.humanitix.com/en/articles/8888509-i-need-to-change-the-details-of-my-order-tickets&#34;&gt;Edit the name on my order&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;can-i-have-a-personal-fire&#34;&gt;Can I Have a Personal Fire?&lt;/h2&gt;&#xA;&lt;p&gt;Absolutely, but it must be in a fire dish up off the ground.&lt;/p&gt;</description>
     </item>
   </channel>

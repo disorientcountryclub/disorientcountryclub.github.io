@@ -1,6 +1,6 @@
 ---
 title: "Important: Gate Schedule Update"
-date: 2025-05-15
+date: 2026-01-23
 tags: ["logistics", "important"]
 ---
 
