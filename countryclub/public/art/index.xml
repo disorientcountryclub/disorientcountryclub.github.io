@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Art Installations on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</title>
-    <link>http://localhost:1313/art/</link>
+    <link>https://disorientcountry.club/art/</link>
     <description>Recent content in Art Installations on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/art/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://disorientcountry.club/art/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pyramid On The Sea</title>
-      <link>http://localhost:1313/art/pyramid-on-the-sea/</link>
+      <link>https://disorientcountry.club/art/pyramid-on-the-sea/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/art/pyramid-on-the-sea/</guid>
+      <guid>https://disorientcountry.club/art/pyramid-on-the-sea/</guid>
       <description>&lt;p&gt;Experience a mesmerizing illuminated pyramid installation floating on the lake, creating a magical focal point for nighttime contemplation.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Thirteenth</title>
-      <link>http://localhost:1313/art/the-thirteenth/</link>
+      <link>https://disorientcountry.club/art/the-thirteenth/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/art/the-thirteenth/</guid>
+      <guid>https://disorientcountry.club/art/the-thirteenth/</guid>
       <description>&lt;p&gt;This temple is made of thirteen wooden octahedra to commemorate Country Club&amp;rsquo;s thirteenth edition. This is the first time we include Zero Gravity Chairs in an actual Geodesic Temple.&lt;/p&gt;&#xA;&lt;p&gt;The temple will be burned at sunset on Sunday, approximately 8pm.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -2,4 +2,6 @@
 title: "Theme Camps"
 ---
 
-Discover the amazing theme camps creating unique experiences at Country Club XIII.
+These theme camps are creating unique interactive experiences at Country Club XIV.
+
+Registration form coming soon!

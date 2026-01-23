@@ -2,4 +2,4 @@
 title: "Announcements"
 ---
 
-Stay updated with the latest news and important information about Country Club XIII.
+Stay updated with the latest news and important information about Country Club XIV.
