@@ -1,7 +1,7 @@
 ---
-title: "Art Installations"
+title: "Our Art + Your Art"
 ---
 
-The following art installations are registered for Country Club XIV - Presence and the Eternal Now.
+We invite you to bring your magic to plug it into the vortex. Disorient Country Club is an ephemeral dream that exists for one weekend only. Together we ride the spiral of this continually morphing long weekend of art, theme camps, art cars, art boats, and electronic and live music.
 
 Registration form coming soon!

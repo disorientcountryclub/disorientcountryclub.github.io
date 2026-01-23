@@ -51,6 +51,6 @@ theme = 'countryclub'
   weight = 5
 
 [[menus.main]]
-  name = 'Volunteer'
-  url = '/volunteer/'
+  name = 'Get Involved'
+  url = '/get-involved/'
   weight = 5

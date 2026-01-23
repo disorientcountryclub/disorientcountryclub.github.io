@@ -1,6 +1,6 @@
 ---
 title: "Preparing for Departure"
-weight: 1
+weight: 2
 ---
 
 ## How Do I Get There?
@@ -24,17 +24,17 @@ Disorient is offering modest art grants for the creation of selected projects di
 
 ## Theme Camps
 
-We welcome large and small theme camps! Renegade secret camps welcome! **All soundcamps must be registered so we can arrange away from neighbors.** Want to get official placement? [Fill out this form](https://tinyurl.com/26mzfcpd)
+We welcome large and small theme camps! Renegade secret camps welcome! **All soundcamps must be registered so we can arrange away from neighbors.** Want to get official placement? [Fill out this form](https://example.com)
 
 ## Submit Art
 
 We love large scale art that connects in spirit with the natural features of the landscape. Smaller pieces are welcome as well, interactive works will be given priority!
 
-All submissions should be able to withstand sun, rain, wind, heat and humidity. We have shade structures on site that can be utilized to build covered tarped tented spaces. You must bring a team to assemble and disengage, we can provide the pieces. We also have 3 art cabins that feature rotating themes and art. [Submit proposals here](https://tinyurl.com/ytfvtyjb)
+All submissions should be able to withstand sun, rain, wind, heat and humidity. We have shade structures on site that can be utilized to build covered tarped tented spaces. You must bring a team to assemble and disengage, we can provide the pieces. We also have 3 art cabins that feature rotating themes and art. [Submit proposals here](https://example.com)
 
 ## Event Submission for Schedule of Events
 
-Please use [this form](https://tinyurl.com/2mjykzfm) for:
+Please use [this form](https://example.com) for:
 
 - Workshops
 - Performance art
@@ -43,55 +43,6 @@ Please use [this form](https://tinyurl.com/2mjykzfm) for:
 - Special meals or restaurant events
 - Art car parties
 
-## Get Involved
-
-The mission of Disorient is to make people happy. As we get bigger and more organized, it's important to remember that what makes Disorient special is that by joining together, we can bring happiness to more and more people. That is what we do on the playa. It is what we strive to do off the playa. Volunteer to join us. It is our foundation. It is our heart. Join the volunteer squad. Help us make the magic that is the Country Club experience. It is not a great way to meet new people and get involved, it is the BEST way. You will truly feel a part of the fold once you have been a part of the creation of a Disorient event. Want to volunteer for Country Club? Unsure of what you can do? Do not fret, my friend, no specialized skills are necessary. [Fill out this form](https://tinyurl.com/56v7bzmf) - we will find a place for you, we promise.
-
-## Self Reliance
-
-### We Do Not Provide Water
-
-There is no water provided at Country Club. There are no showers, but we provide a sauna. You must bring all the water you will need for the weekend. Recommendation is a little more than 1 gallon per person per day for drinking, cooking and cleaning. There is a local grocery store 10 mins away, in and outs allowed while gate is open. Gate is closed overnight.
-
-### You Need to Bring
-
-- Photo ID
-- Tent
-- Food
-- Beverages/Water
-- Cooking supplies
-- Utensils
-- Reusable cup
-- Bug Repellent aka DEET / Permethrin
-
-## Local Resources
-
-### Grocery Stores
-
-- **Hannaford Supermarket** (good selection of produce and organics) 295 NY-375, West Hurley. Open 6:30am-10pm, everyday
-- **Boiceville Market** (full grocery store) 4099 NY-28, Boiceville, NY 12412
-  - Monday: 7AM-8PM
-  - Tuesday: 7AM–8PM
-  - Wednesday: 7AM–8PM
-  - Thursday: 7AM–8PM
-  - Friday: 7AM–9PM
-  - Saturday: 7AM–9PM
-  - Sunday: 8AM–8PM
-- **Phoenicia Market** (small limited selection) 85 Main St, Phoenicia. Phone: (845) 688-2448. Open everyday 7am-11pm (Hours may change)
-
-### Nearest Pizza
-
-[Phoenicia Pizza](https://maps.app.goo.gl/cirvzNWG8ag7SfXK6) - 5575 NY-28, Phoenicia, NY 12464
-
-### Nearest Big Box Store
-
-- **Walmart Supercenter**, Hudson Valley Plaza, 601 Frank Sottile Blvd, Kingston - Open 24 hours
-- **Target**, 1300 Ulster Ave, Kingston - Sun-Thurs 8am-10pm, Fri & Sat 8am-11pm
-
-### Camping Supplies
-
-- **Kenco Outfitters** (locally owned), 1000 Hurley Mountain Rd, Kingston. M-F 9am-7pm, Sat 9am-6pm, Sunday 11am-5pm
-- **Camping World of Kingston**, 124 NY-28, Kingston. Mon-Fri 8am-7pm, Sat 8am-5pm, Sun 11am-5pm
 
 ## Things to Know
 

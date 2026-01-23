@@ -2,11 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/guide/faq/</loc>
+    <loc>http://localhost:1313/guide/disengage/</loc>
   </url><url>
-    <loc>http://localhost:1313/guide/preparing-for-departure/</loc>
+    <loc>http://localhost:1313/guide/1-faq/</loc>
   </url><url>
-    <loc>http://localhost:1313/guide/upon-arrival/</loc>
+    <loc>http://localhost:1313/guide/lnt/</loc>
+  </url><url>
+    <loc>http://localhost:1313/guide/2-preparing-for-departure/</loc>
+  </url><url>
+    <loc>http://localhost:1313/guide/3-self-reliance/</loc>
+  </url><url>
+    <loc>http://localhost:1313/guide/4-upon-arrival/</loc>
   </url><url>
     <loc>http://localhost:1313/announcements/</loc>
     <lastmod>2026-01-23T00:00:00+00:00</lastmod>
@@ -26,22 +32,22 @@
     <loc>http://localhost:1313/tags/</loc>
     <lastmod>2026-01-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/art/</loc>
-  </url><url>
     <loc>http://localhost:1313/camps/camp-boozehole/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
     <loc>http://localhost:1313/lineup/djs/</loc>
   </url><url>
+    <loc>http://localhost:1313/get-involved/</loc>
+  </url><url>
     <loc>http://localhost:1313/guide/</loc>
   </url><url>
     <loc>http://localhost:1313/lineup/</loc>
   </url><url>
+    <loc>http://localhost:1313/art/</loc>
+  </url><url>
     <loc>http://localhost:1313/camps/</loc>
   </url><url>
     <loc>http://localhost:1313/lineup/vjs/</loc>
-  </url><url>
-    <loc>http://localhost:1313/volunteer/</loc>
   </url>
 </urlset>
