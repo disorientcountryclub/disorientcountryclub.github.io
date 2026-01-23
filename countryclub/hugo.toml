@@ -49,3 +49,8 @@ theme = 'countryclub'
   name = 'Guide'
   url = '/guide/'
   weight = 5
+
+[[menus.main]]
+  name = 'Volunteer'
+  url = '/volunteer/'
+  weight = 5

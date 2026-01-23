@@ -192,6 +192,9 @@
   .block {
     display: block;
   }
+  .hidden {
+    display: none;
+  }
   .list-item {
     display: list-item;
   }
