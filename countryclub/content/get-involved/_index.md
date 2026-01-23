@@ -8,7 +8,9 @@ The mission of Disorient is to make people happy. As we get bigger and more orga
 
 Want to volunteer for Country Club? Unsure of what you can do? Do not fret, my friend, no specialized skills are necessary. We will find a place for you, we promise.
 
-Volunteer registration forms coming soon!
+&nbsp;
+
+[Sign up to play here](/get-involved).
 
 <!--
 - [VOLUNTEER](https://example.com)

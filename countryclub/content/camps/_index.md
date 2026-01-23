@@ -2,6 +2,8 @@
 title: "Theme Camps"
 ---
 
-These theme camps are creating unique interactive experiences at Country Club XIV.
+We welcome large and small theme camps! Renegade secret camps welcome!
 
-Registration form coming soon!
+&nbsp;
+
+Want to get official placement? [Register your theme camp](/get-involved) to join the fun!

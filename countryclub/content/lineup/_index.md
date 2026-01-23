@@ -4,7 +4,9 @@ title: "Lineup"
 
 Country Club is a participatory and interactive experience.
 
-Registration form coming soon!
+&nbsp;
+
+[Sign up to DJ or VJ](/get-involved) with us!
 
 <!-- - [DJ Lineup](/lineup/djs/)
 - [VJ Lineup](/lineup/vjs/) -->

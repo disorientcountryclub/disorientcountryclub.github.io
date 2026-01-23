@@ -24,17 +24,17 @@ Disorient is offering modest art grants for the creation of selected projects di
 
 ## Theme Camps
 
-We welcome large and small theme camps! Renegade secret camps welcome! **All soundcamps must be registered so we can arrange away from neighbors.** Want to get official placement? [Fill out this form](https://example.com)
+We welcome large and small theme camps! Renegade secret camps welcome! **All soundcamps must be registered so we can arrange away from neighbors.** Want to get official placement? [See this page](/get-involved).
 
 ## Submit Art
 
 We love large scale art that connects in spirit with the natural features of the landscape. Smaller pieces are welcome as well, interactive works will be given priority!
 
-All submissions should be able to withstand sun, rain, wind, heat and humidity. We have shade structures on site that can be utilized to build covered tarped tented spaces. You must bring a team to assemble and disengage, we can provide the pieces. We also have 3 art cabins that feature rotating themes and art. [Submit proposals here](https://example.com)
+All submissions should be able to withstand sun, rain, wind, heat and humidity. We have shade structures on site that can be utilized to build covered tarped tented spaces. You must bring a team to assemble and disengage, we can provide the pieces. We also have 3 art cabins that feature rotating themes and art. [Submit proposals here](/get-involved).
 
 ## Event Submission for Schedule of Events
 
-Please use [this form](https://example.com) for:
+Please see [this page](/get-involved) to register:
 
 - Workshops
 - Performance art

@@ -28,4 +28,6 @@ artists:
 
 You know what this is.
 
-Registration form coming soon!
+&nbsp;
+
+[Sign up to play here](/get-involved).

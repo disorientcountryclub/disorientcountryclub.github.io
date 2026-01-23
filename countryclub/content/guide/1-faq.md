@@ -23,7 +23,7 @@ Absolutely, but it must be in a fire dish up off the ground.
 
 ## I Want to Get More Involved! How Do I Plug In?
 
-See the [volunteer page](https://disorientcountry.club/volunteer) for information on how to join our community.
+See the [volunteer page](/get-involved) for information on how to join our community.
 
 ## What is the Parking Situation For My Car?
 

@@ -19,5 +19,7 @@ artists:
 
 Our VJs accompany the music with stunning visuals.
 
-Registration form coming soon!
+&nbsp;
+
+[Sign up to play here](/get-involved).
 
