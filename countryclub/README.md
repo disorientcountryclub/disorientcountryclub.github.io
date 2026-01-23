@@ -1,15 +1,23 @@
 # Country Club Hugo Site
 
-Hugo-based static site for Disorient Country Club events.
+Hugo-based static site for Disorient Country Club events with Tailwind CSS integration.
+
+## Setup
+
+First time setup:
+
+```bash
+cd countryclub/
+npm install
+```
 
 ## Building the Site
 
 ```bash
-cd countryclub/
 hugo build
 ```
 
-The generated site will be in `public/`.
+The generated site will be in `public/`. Hugo automatically processes Tailwind CSS during the build.
 
 ## Adding Content
 
@@ -133,9 +141,43 @@ Then visit http://localhost:1313
 
 The custom theme is in `themes/countryclub/`:
 - **Layouts**: `themes/countryclub/layouts/` - HTML templates
-- **Styles**: `themes/countryclub/static/css/main.css` - CSS styling
+- **Styles**:
+  - `assets/css/tailwind.css` - Tailwind CSS source (processed by Hugo)
+  - `themes/countryclub/static/css/main.css` - Custom CSS styling
 
 Content files remain untouched when updating the theme.
+
+### Using Tailwind CSS
+
+Tailwind CSS is integrated with Hugo and automatically processes utility classes from your templates:
+
+1. **Add utility classes** directly in your HTML templates in `themes/countryclub/layouts/`
+2. **Custom theme colors** are defined in `assets/css/tailwind.css`:
+   - `electric-pink` (#ff1493)
+   - `cyber-blue` (#00ffff)
+   - `neon-purple` (#b026ff)
+   - `hot-magenta` (#ff00ff)
+   - `deep-violet` (#4a0e78)
+   - `midnight` (#0a0015)
+
+3. **Custom utility classes** available:
+   - `.text-gradient-vaporwave` - Gradient text effect
+   - `.glow-cyan` - Cyan glow text shadow
+   - `.glow-pink` - Pink glow text shadow
+
+4. **Hugo automatically**:
+   - Scans templates for Tailwind classes
+   - Generates optimized CSS with only used utilities
+   - Fingerprints CSS in production builds
+
+Example usage in templates:
+```html
+<div class="bg-midnight text-cyber-blue p-4 rounded-lg">
+  <h1 class="text-gradient-vaporwave text-4xl font-display">
+    Country Club XIV
+  </h1>
+</div>
+```
 
 ## Menu Configuration
 

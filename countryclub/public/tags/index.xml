@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://disorientcountry.club/tags/</link>
     <description>Recent content in Tags on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 May 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://disorientcountry.club/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Important</title>
-      <link>http://localhost:1313/tags/important/</link>
+      <link>https://disorientcountry.club/tags/important/</link>
       <pubDate>Thu, 15 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/important/</guid>
+      <guid>https://disorientcountry.club/tags/important/</guid>
       <description></description>
     </item>
     <item>
       <title>Logistics</title>
-      <link>http://localhost:1313/tags/logistics/</link>
+      <link>https://disorientcountry.club/tags/logistics/</link>
       <pubDate>Thu, 15 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/logistics/</guid>
+      <guid>https://disorientcountry.club/tags/logistics/</guid>
       <description></description>
     </item>
   </channel>

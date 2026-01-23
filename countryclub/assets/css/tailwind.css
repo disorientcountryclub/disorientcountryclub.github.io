@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@source "../watching/hugo_stats.json";
+
+/* Custom vaporwave theme */
+@theme {
+  --color-electric-pink: #ff1493;
+  --color-cyber-blue: #00ffff;
+  --color-neon-purple: #b026ff;
+  --color-hot-magenta: #ff00ff;
+  --color-deep-violet: #4a0e78;
+  --color-midnight: #0a0015;
+
+  --font-family-display: 'Orbitron', monospace;
+  --font-family-body: 'Rajdhani', sans-serif;
+}
+
+/* Custom utilities */
+.text-gradient-vaporwave {
+  background: linear-gradient(135deg, var(--color-cyber-blue) 0%, var(--color-electric-pink) 50%, var(--color-neon-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-cyan {
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.glow-pink {
+  text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+}
