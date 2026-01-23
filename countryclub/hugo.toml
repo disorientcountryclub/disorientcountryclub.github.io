@@ -1,3 +1,32 @@
 baseURL = 'https://disorientcountry.club/'
 languageCode = 'en-us'
-title = 'Disorient Presents: Country Club'
+title = 'Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW'
+theme = 'countryclub'
+
+[params]
+  description = 'Join Disorient for year 14 of our annual journey of deep chilling, off-the-grid futurist relaxation. Country Club is a lake and lush green woodland oasis where blissful self-reliance meets massive multiplayer techno and technology participation.'
+
+[[menus.main]]
+  name = 'Announcements'
+  url = '/announcements/'
+  weight = 1
+
+[[menus.main]]
+  name = 'Lineup'
+  url = '/lineup/'
+  weight = 2
+
+[[menus.main]]
+  name = 'Art'
+  url = '/art/'
+  weight = 3
+
+[[menus.main]]
+  name = 'Camps'
+  url = '/camps/'
+  weight = 4
+
+[[menus.main]]
+  name = 'Guide'
+  url = '/guide/'
+  weight = 5

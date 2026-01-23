@@ -1,0 +1,43 @@
+{{ define "main" }}
+<div class="container">
+  <section class="hero">
+    <h1>{{ .Title }}</h1>
+    <div class="content">
+      {{ .Content }}
+    </div>
+  </section>
+
+  {{ with (where .Site.RegularPages "Section" "announcements") }}
+  <section class="announcements">
+    <h2>Recent Announcements</h2>
+    <div class="announcement-list">
+      {{ range first 5 (sort . "Date" "desc") }}
+        <article class="announcement-item">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <time>{{ .Date.Format "January 2, 2006" }}</time>
+          {{ if .Params.tags }}
+            <div class="tags">
+              {{ range .Params.tags }}
+                <span class="tag">{{ . }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
+        </article>
+      {{ end }}
+    </div>
+    <a href="{{ "/announcements" | relURL }}" class="view-all">View All Announcements →</a>
+  </section>
+  {{ end }}
+
+  <section class="quick-links">
+    <h2>Sections</h2>
+    <div class="links-grid">
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}" class="link-card">
+          <h3>{{ .Name }}</h3>
+        </a>
+      {{ end }}
+    </div>
+  </section>
+</div>
+{{ end }}

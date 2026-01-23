@@ -1,0 +1,8 @@
+name = "Country Club"
+license = "MIT"
+description = "Custom theme for Disorient Country Club"
+homepage = "https://disorientcountry.club/"
+min_version = "0.112.0"
+
+[author]
+  name = "Disorient"

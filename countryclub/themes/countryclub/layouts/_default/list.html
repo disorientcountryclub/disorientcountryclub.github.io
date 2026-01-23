@@ -1,0 +1,66 @@
+{{ define "main" }}
+<div class="container">
+  <header class="list-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="list-intro">
+        {{ . }}
+      </div>
+    {{ end }}
+  </header>
+
+  <div class="list-items">
+    {{ range .Pages }}
+      <article class="list-item">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+        {{ if .Params.name }}
+          <h3 class="artist-name">{{ .Params.name }}</h3>
+        {{ end }}
+
+        {{ if .Params.artist }}
+          <p class="artist">Artist: {{ .Params.artist }}</p>
+        {{ end }}
+
+        {{ if .Params.venue }}
+          <p class="venue">{{ .Params.venue }}</p>
+        {{ end }}
+
+        {{ if .Params.setTime }}
+          <p class="set-time">{{ .Params.setTime }}</p>
+        {{ end }}
+
+        {{ if .Params.location }}
+          <p class="location">{{ .Params.location }}</p>
+        {{ end }}
+
+        {{ if .Params.tagline }}
+          <p class="tagline">{{ .Params.tagline }}</p>
+        {{ end }}
+
+        {{ if .Params.description }}
+          <p class="description">{{ .Params.description }}</p>
+        {{ end }}
+
+        {{ if .Params.date }}
+          <time>{{ .Date.Format "January 2, 2006" }}</time>
+        {{ end }}
+
+        {{ if .Params.tags }}
+          <div class="tags">
+            {{ range .Params.tags }}
+              <span class="tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ if .Summary }}
+          <div class="summary">
+            {{ .Summary }}
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

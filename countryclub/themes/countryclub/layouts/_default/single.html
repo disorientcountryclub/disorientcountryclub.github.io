@@ -1,0 +1,68 @@
+{{ define "main" }}
+<div class="container">
+  <article class="single-content">
+    <header>
+      <h1>{{ .Title }}</h1>
+
+      {{ if .Params.date }}
+        <time>{{ .Date.Format "January 2, 2006" }}</time>
+      {{ end }}
+
+      {{ if .Params.name }}
+        <h2 class="artist-name">{{ .Params.name }}</h2>
+      {{ end }}
+
+      {{ if .Params.artist }}
+        <p class="artist">Artist: {{ .Params.artist }}</p>
+      {{ end }}
+
+      {{ if .Params.venue }}
+        <p class="venue">Venue: {{ .Params.venue }}</p>
+      {{ end }}
+
+      {{ if .Params.setTime }}
+        <p class="set-time">Set Time: {{ .Params.setTime }}</p>
+      {{ end }}
+
+      {{ if .Params.location }}
+        <p class="location">Location: {{ .Params.location }}</p>
+      {{ end }}
+
+      {{ if .Params.tagline }}
+        <p class="tagline">{{ .Params.tagline }}</p>
+      {{ end }}
+
+      {{ if .Params.hours }}
+        <p class="hours">Hours: {{ .Params.hours }}</p>
+      {{ end }}
+
+      {{ if .Params.description }}
+        <p class="description">{{ .Params.description }}</p>
+      {{ end }}
+
+      {{ if .Params.events }}
+        <div class="events">
+          <h3>Events</h3>
+          <ul>
+            {{ range .Params.events }}
+              <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+
+      {{ if .Params.tags }}
+        <div class="tags">
+          {{ range .Params.tags }}
+            <span class="tag">{{ . }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+    </header>
+
+    <div class="content">
+      {{ .Content }}
+    </div>
+  </article>
+</div>
+{{ end }}

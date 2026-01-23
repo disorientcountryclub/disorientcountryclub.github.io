@@ -1,0 +1,14 @@
+<header>
+  <div class="container">
+    <nav>
+      <h1><a href="{{ "/" | relURL }}">{{ .Site.Title }}</a></h1>
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <ul class="nav-menu">
+        {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+</header>
