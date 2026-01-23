@@ -21,6 +21,11 @@ theme = 'countryclub'
   description = 'Join Disorient for year 14 of our annual journey of deep chilling, off-the-grid futurist relaxation. Country Club is a lake and lush green woodland oasis where blissful self-reliance meets massive multiplayer techno and technology participation.'
 
 [[menus.main]]
+  name = 'Home'
+  url = '/'
+  weight = 0
+
+[[menus.main]]
   name = 'Announcements'
   url = '/announcements/'
   weight = 1

@@ -1,22 +1,22 @@
-<header class="site-header">
+<header class="site-header {{ if .IsHome }}home-header{{ else }}page-header{{ end }}">
   <div class="hero-splash">
     <img src="{{ "images/CCWebsiteSplash_2026_v006.png" | relURL }}" alt="Country Club XIV - Presence and the Eternal Now" class="splash-image">
     <div class="splash-overlay"></div>
   </div>
-
-  <nav class="floating-nav">
-    <div class="container">
-      <input type="checkbox" id="menu-toggle" class="menu-toggle">
-      <label for="menu-toggle" class="menu-icon">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-      <ul class="nav-menu">
-        {{ range .Site.Menus.main }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </div>
-  </nav>
 </header>
+
+<nav class="main-nav">
+  <div class="container">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <ul class="nav-menu">
+      {{ range sort .Site.Menus.main "Weight" }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+</nav>
