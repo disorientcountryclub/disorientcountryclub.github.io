@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Theme Camps on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</title>
-    <link>https://disorientcountry.club/camps/</link>
+    <link>http://localhost:1313/camps/</link>
     <description>Recent content in Theme Camps on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://disorientcountry.club/camps/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/camps/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Camp Boozehole</title>
-      <link>https://disorientcountry.club/camps/camp-boozehole/</link>
+      <link>http://localhost:1313/camps/camp-boozehole/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://disorientcountry.club/camps/camp-boozehole/</guid>
+      <guid>http://localhost:1313/camps/camp-boozehole/</guid>
       <description>&lt;p&gt;Welcome to Camp Boozehole YA&amp;rsquo;LL!&lt;/p&gt;&#xA;&lt;p&gt;This year we present you with the BOOZEHOLE SALOON!&lt;/p&gt;&#xA;&lt;p&gt;Come on by for a ye olde rootin&amp;rsquo; tootin&amp;rsquo; raucously boozy grand old timey!! Serving you hooch (and wild west vibes) all weekend long.&lt;/p&gt;&#xA;&lt;p&gt;Bring your A game to GET THE BOOT! and we&amp;rsquo;ll be happy to kick you out of our watering hole with a thematic toss through the saloon doors!! (seriously … we want to throw your a** out)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Digital Native</title>
-      <link>https://disorientcountry.club/camps/digital-native/</link>
+      <link>http://localhost:1313/camps/digital-native/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://disorientcountry.club/camps/digital-native/</guid>
+      <guid>http://localhost:1313/camps/digital-native/</guid>
       <description>&lt;p&gt;Digital Native is still going strong! Join us to dance or just hang out in our chill space. We have new sound and new visuals for 2025! Nightly DJs and bar. Events and surprise DJ sets during the day. Schedules are posted daily.&lt;/p&gt;</description>
     </item>
   </channel>
