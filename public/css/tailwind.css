@@ -168,6 +168,9 @@
   }
 }
 @layer utilities {
+  .visible {
+    visibility: visible;
+  }
   .static {
     position: static;
   }
@@ -191,6 +194,9 @@
   }
   .block {
     display: block;
+  }
+  .contents {
+    display: contents;
   }
   .grid {
     display: grid;
