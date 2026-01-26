@@ -10,15 +10,11 @@ Want to volunteer for Country Club? Unsure of what you can do? Do not fret, my f
 
 &nbsp;
 
-[Sign up to play here](/get-involved).
-
-<!--
-- [VOLUNTEER](https://example.com)
-- [SUBMIT ART](https://example.com)
-- [THEMECAMP PLACEMENT REQUEST](https://example.com)
-- [SUBMIT EVENT OR WORKSHOP TO SURVIVAL GUIDE](https://example.com)
-- [FACEBOOK EVENT](https://example.com)
-- [DJ BOOKING](https://example.com)
-- [VJ BOOKING](https://example.com)
-- [DISENGAGE](https://example.com)
--->
+- [VOLUNTEER](https://tinyurl.com/4xwyzby7)
+- [SUBMIT ART](https://tinyurl.com/yc8ptjud)
+- [THEMECAMP PLACEMENT REQUEST](https://tinyurl.com/37u7hmr6)
+- [SUBMIT EVENT OR WORKSHOP TO SURVIVAL GUIDE](https://tinyurl.com/36vjnzer)
+<!-- - [FACEBOOK EVENT](https://example.com) -->
+- [DJ BOOKING](https://tinyurl.com/2utb3cjm)
+- [VJ BOOKING](https://tinyurl.com/yss2p466)
+- [DISENGAGE](https://tinyurl.com/4xwyzby7)
