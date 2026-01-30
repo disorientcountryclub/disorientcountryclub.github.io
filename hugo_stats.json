@@ -70,6 +70,8 @@
       "tagline",
       "tags",
       "title",
+      "title-shadow",
+      "title-stack",
       "venue",
       "view-all"
     ],
