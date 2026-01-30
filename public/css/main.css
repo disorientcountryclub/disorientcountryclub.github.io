@@ -146,7 +146,8 @@ a:hover {
 }
 
 .hero-text-top {
-  text-align: center;
+  text-align: left;
+  align-self: flex-start;
 }
 
 .hero-text-top .presents {
@@ -180,7 +181,8 @@ a:hover {
 }
 
 .hero-text-bottom {
-  text-align: center;
+  text-align: right;
+  align-self: flex-end;
   color: #B7B7B7;
   font-family: 'Disorient', var(--font-display);
   font-size: 1.5rem;
@@ -203,6 +205,11 @@ a:hover {
 
 /* Responsive text sizing */
 @media (max-width: 968px) {
+  .hero-text-top {
+    text-align: center;
+    align-self: center;
+  }
+
   .hero-text-top .title {
     font-size: 2.5rem;
     letter-spacing: 4px;
@@ -215,6 +222,11 @@ a:hover {
   .hero-text-top .subtitle {
     font-size: 1.2rem;
     letter-spacing: 2px;
+  }
+
+  .hero-text-bottom {
+    text-align: center;
+    align-self: center;
   }
 
   .hero-text-bottom .dates {
