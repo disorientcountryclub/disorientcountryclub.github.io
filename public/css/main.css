@@ -762,6 +762,10 @@ section h2 {
   color: #c0c0c0;
 }
 
+.list-intro li {
+  list-style: none;
+}
+
 .list-items {
   display: grid;
   gap: 40px;
