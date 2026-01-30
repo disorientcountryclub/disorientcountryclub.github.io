@@ -248,11 +248,11 @@ a:hover {
   }
 
   .hero-text-top .presents {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .hero-text-top .subtitle {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     letter-spacing: 2px;
   }
 
@@ -262,12 +262,12 @@ a:hover {
   }
 
   .hero-text-bottom .dates {
-    font-size: 1.5rem;
+    font-size: 1rem;
     letter-spacing: 3px;
   }
 
   .hero-text-bottom .location {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 
   .hero-vexillum {
@@ -287,21 +287,21 @@ a:hover {
   }
 
   .hero-text-top .presents {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
   }
 
   .hero-text-top .subtitle {
-    font-size: 1rem;
+    font-size: 0.75rem;
     letter-spacing: 1px;
   }
 
   .hero-text-bottom .dates {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     letter-spacing: 2px;
   }
 
   .hero-text-bottom .location {
-    font-size: 0.9rem;
+    font-size: 0.5rem;
   }
 }
 
