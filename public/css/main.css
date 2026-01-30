@@ -225,6 +225,15 @@ a:hover {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
+.hero-vexillum {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+  height: clamp(80px, 15vw, 180px);
+  width: auto;
+  pointer-events: none;
+}
+
 /* Responsive text sizing */
 @media (max-width: 968px) {
   .hero-text-top {
@@ -259,6 +268,10 @@ a:hover {
 
   .hero-text-bottom .location {
     font-size: 1rem;
+  }
+
+  .hero-vexillum {
+    display: none;
   }
 }
 
