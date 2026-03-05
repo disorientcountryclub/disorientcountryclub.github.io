@@ -16,7 +16,7 @@ We have the destination, book your ticket aboard. Get with Disorient on the moth
 
 Join Disorient for year 14 of our annual journey of deep chilling, off-the-grid futurist relaxation. Country Club is a lake and lush green woodland oasis where blissful self-reliance meets massive multiplayer techno and technology participation.
 
-Explore a constantly shifting blank canvas of music, art, and performance. Country Club is a fundraiser organized by an all volunteer team. All profits are used for Disorient art creations at Burning Man.
+Explore a constantly shifting blank canvas of music, art, and performance. Country Club is an event organized by an all volunteer team.
 
 &nbsp;
 
