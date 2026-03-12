@@ -18,3 +18,9 @@ Want to volunteer for Country Club? Unsure of what you can do? Do not fret, my f
 - [DJ BOOKING](https://tinyurl.com/52k6nayf) (closes April 20th)
 - [VJ BOOKING](https://tinyurl.com/yss2p466)
 - [DISENGAGE](https://tinyurl.com/4xwyzby7)
+
+{{< gallery >}}
+{{< img src="get-involved/IMG_9608.JPEG" alt="Get Involved" >}}
+{{< img src="get-involved/IMG_9740.JPEG" alt="Get Involved" >}}
+{{< img src="get-involved/IMG_4985.JPEG" alt="Get Involved" >}}
+{{< /gallery >}}

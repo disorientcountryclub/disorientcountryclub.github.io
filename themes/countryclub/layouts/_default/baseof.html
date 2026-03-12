@@ -7,5 +7,17 @@
       {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
+    <div id="image-modal" class="image-modal" onclick="this.classList.remove('active')">
+      <img id="modal-img" src="" alt="">
+    </div>
+    <script>
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('content-image')) {
+        var modal = document.getElementById('image-modal');
+        document.getElementById('modal-img').src = e.target.src;
+        modal.classList.add('active');
+      }
+    });
+    </script>
   </body>
 </html>
