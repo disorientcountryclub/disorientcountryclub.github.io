@@ -18,6 +18,10 @@ Join Disorient for year 14 of our annual journey of deep chilling, off-the-grid 
 
 Explore a constantly shifting blank canvas of music, art, and performance. Country Club is an event organized by an all volunteer team.
 
+---
+
+An orderly return to chaos. A found frequency where previously there was static. Returning to consciousness by following that sweet distant melody... we realize only the current moment ever existed. Fully awake, now contemplating the texture of silence, our aetherial energy source. Just for this one time, and every time we gather together, our thoughts were, will be, and are the river of intention.
+
 &nbsp;
 
 {{< gallery >}}
