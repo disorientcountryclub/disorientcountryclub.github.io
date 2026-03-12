@@ -1,0 +1,6 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $img := resources.Get $src }}
+{{ if $img }}
+<img src="{{ $img.RelPermalink }}" alt="{{ $alt }}" loading="lazy" class="content-image">
+{{ end }}

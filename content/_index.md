@@ -20,6 +20,24 @@ Explore a constantly shifting blank canvas of music, art, and performance. Count
 
 &nbsp;
 
+{{< gallery >}}
+{{< img src="home/IMG_9646.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_9783.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_9833.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_9616.JPEG" alt="Country Club" >}}
+{{< img src="home/Screenshot 2026-02-28 134539.png" alt="Country Club" >}}
+{{< img src="home/IMG_9761.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_4959.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_4984.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_4992.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_9728.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_9775.JPEG" alt="Country Club" >}}
+{{< img src="home/IMG_9823.JPEG" alt="Country Club" >}}
+{{< img src="home/Screenshot 2026-02-28 134732.png" alt="Country Club" >}}
+{{< /gallery >}}
+
+&nbsp;
+
 <!--
 # Theme
 &nbsp;
