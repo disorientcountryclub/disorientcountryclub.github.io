@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="/css/main.353fe9efc2fbc4d499ced8413dffb1bef15907398c1556c5b05d2a8740ea454b.css">
+  <link rel="stylesheet" href="/css/main.480d9262ab087622c9b999e49f9b558987d02b76fdf9c3e6ebf15ce638e352fa.css">
 </head>
 
   <body>
@@ -82,68 +82,110 @@
 <p>Join Disorient for year 14 of our annual journey of deep chilling, off-the-grid futurist relaxation. Country Club is a lake and lush green woodland oasis where blissful self-reliance meets massive multiplayer techno and technology participation.</p>
 <p>Explore a constantly shifting blank canvas of music, art, and performance. Country Club is an event organized by an all volunteer team.</p>
 <p> </p>
+<div class="image-gallery">
+
+
+
+
+
+<img src="/home/IMG_9646.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_9783.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_9833.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_9616.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/Screenshot%202026-02-28%20134539.png" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_9761.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_4959.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_4984.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_4992.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_9728.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_9775.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/IMG_9823.JPEG" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/home/Screenshot%202026-02-28%20134732.png" alt="Country Club" loading="lazy" class="content-image">
+
+
+
+</div>
+
+<p> </p>
 
     </div>
   </section>
 
   
-  <section class="announcements">
-    <h2>Recent Announcements</h2>
-    <div class="announcement-list">
-      
-        <article class="announcement-item">
-          <h3><a href="/announcements/2026-01-23-gate-hours/">Important: Gate Schedule Update</a></h3>
-          <time>January 23, 2026</time>
-          
-            <div class="tags">
-              
-                <span class="tag">logistics</span>
-              
-                <span class="tag">important</span>
-              
-            </div>
-          
-        </article>
-      
-    </div>
-    <a href="/announcements" class="view-all">View All Announcements →</a>
-  </section>
-  
 
-  <section class="quick-links">
-    <h2>Sections</h2>
-    <div class="links-grid">
-      
-        <a href="/announcements/" class="link-card">
-          <h3>Announcements</h3>
-        </a>
-      
-        <a href="/lineup/" class="link-card">
-          <h3>Lineup</h3>
-        </a>
-      
-        <a href="/art/" class="link-card">
-          <h3>Art</h3>
-        </a>
-      
-        <a href="/camps/" class="link-card">
-          <h3>Camps</h3>
-        </a>
-      
-        <a href="/get-involved/" class="link-card">
-          <h3>Get Involved</h3>
-        </a>
-      
-        <a href="/guide/" class="link-card">
-          <h3>Guide</h3>
-        </a>
-      
-        <a href="/" class="link-card">
-          <h3>Home</h3>
-        </a>
-      
-    </div>
-  </section>
+  
 </div>
 
     </main>
@@ -157,5 +199,17 @@
   </div>
 </footer>
 
+    <div id="image-modal" class="image-modal" onclick="this.classList.remove('active')">
+      <img id="modal-img" src="" alt="">
+    </div>
+    <script>
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('content-image')) {
+        var modal = document.getElementById('image-modal');
+        document.getElementById('modal-img').src = e.target.src;
+        modal.classList.add('active');
+      }
+    });
+    </script>
   </body>
 </html>

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="/css/main.353fe9efc2fbc4d499ced8413dffb1bef15907398c1556c5b05d2a8740ea454b.css">
+  <link rel="stylesheet" href="/css/main.480d9262ab087622c9b999e49f9b558987d02b76fdf9c3e6ebf15ce638e352fa.css">
 </head>
 
   <body>
@@ -75,6 +75,95 @@
         <p>We invite you to bring your magic to plug it into the vortex. Disorient Country Club is an ephemeral dream that exists for one weekend only. Together we ride the spiral of this continually morphing long weekend of art, theme camps, art cars, art boats, and electronic and live music.</p>
 <p> </p>
 <p><a href="/get-involved">Get involved and register</a> art you&rsquo;d like to bring!</p>
+<div class="image-gallery">
+
+
+
+
+
+<img src="/art/IMG_9656.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/IMG_9720.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/IMG_4994.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/IMG_4983.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/Screenshot%202026-02-28%20135519.png" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/IMG_5021.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/IMG_5032.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/IMG_9837.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/Screenshot%202026-02-28%20135211.png" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/Screenshot%202026-02-28%20135435.png" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/Screenshot%202026-02-28%20135724.png" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+
+
+
+<img src="/art/IMG_5056.JPEG" alt="Art at Country Club" loading="lazy" class="content-image">
+
+
+
+</div>
+
 
       </div>
     
@@ -96,5 +185,17 @@
   </div>
 </footer>
 
+    <div id="image-modal" class="image-modal" onclick="this.classList.remove('active')">
+      <img id="modal-img" src="" alt="">
+    </div>
+    <script>
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('content-image')) {
+        var modal = document.getElementById('image-modal');
+        document.getElementById('modal-img').src = e.target.src;
+        modal.classList.add('active');
+      }
+    });
+    </script>
   </body>
 </html>
