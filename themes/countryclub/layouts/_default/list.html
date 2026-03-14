@@ -11,8 +11,9 @@
 
   <div class="list-items">
     {{ range .Pages }}
+    <a href="{{ .RelPermalink }}">
       <article class="list-item">
-        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <h2>{{ .Title }}</h2>
 
         {{ if .Params.name }}
           <h3 class="artist-name">{{ .Params.name }}</h3>
@@ -54,6 +55,7 @@
           </div>
         {{ end }}
       </article>
+    </a>
     {{ end }}
   </div>
 </div>
