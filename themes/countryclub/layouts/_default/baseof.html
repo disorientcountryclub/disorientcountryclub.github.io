@@ -18,6 +18,11 @@
         modal.classList.add('active');
       }
     });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('image-modal').classList.remove('active');
+      }
+    });
     </script>
   </body>
 </html>
