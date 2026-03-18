@@ -371,6 +371,7 @@
   }
 
   // ===== Gradient Canvas Renderer =====
+<<<<<<< HEAD
   var logoImg = new Image();
   logoImg.crossOrigin = 'anonymous';
   logoImg.src = '{{ "images/20260121.CCXiVVexillum.png" | relURL }}';
@@ -402,25 +403,45 @@
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
+=======
+  function renderQR(canvas, qr, pixelSize) {
+    var quiet = 4; // quiet zone modules
+    var totalModules = qr.size + quiet * 2;
+    var canvasSize = totalModules * pixelSize;
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+>>>>>>> bb579cc (add promo page and QR generator)
 
     var ctx = canvas.getContext('2d');
 
     // White background
     ctx.fillStyle = '#ffffff';
+<<<<<<< HEAD
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
     // Create gradient for dark modules
     var gradient = ctx.createLinearGradient(0, 0, qrCanvasSize, qrCanvasSize);
+=======
+    ctx.fillRect(0, 0, canvasSize, canvasSize);
+
+    // Create gradient for dark modules
+    var gradient = ctx.createLinearGradient(0, 0, canvasSize, canvasSize);
+>>>>>>> bb579cc (add promo page and QR generator)
     gradient.addColorStop(0, '#ff8800');
     gradient.addColorStop(1, '#ff0088');
     ctx.fillStyle = gradient;
 
+<<<<<<< HEAD
     // Draw modules (use fractional pixel sizes for consistent canvas dimensions)
+=======
+    // Draw modules
+>>>>>>> bb579cc (add promo page and QR generator)
     for (var r = 0; r < qr.size; r++) {
       for (var c = 0; c < qr.size; c++) {
         if (qr.matrix[r][c]) {
           var x = (c + quiet) * pixelSize;
           var y = (r + quiet) * pixelSize;
+<<<<<<< HEAD
           // Snap to pixel grid to avoid gaps
           ctx.fillRect(Math.floor(x), Math.floor(y),
             Math.ceil(pixelSize), Math.ceil(pixelSize));
@@ -466,28 +487,50 @@
     ctx.fillText('SECRET', canvasWidth / 2, textY - textPadding * 4.25);
     ctx.fillText('UPSTATE LOCATION', canvasWidth / 2, textY - textPadding * 2.5);
     ctx.fillText('MAY 21-25', canvasWidth / 2, textY);
+=======
+          ctx.fillRect(x, y, pixelSize, pixelSize);
+        }
+      }
+    }
+>>>>>>> bb579cc (add promo page and QR generator)
   }
 
   // ===== UI =====
   function update() {
     var path = document.getElementById('qr-path').value;
     var size = parseInt(document.getElementById('qr-size').value);
+<<<<<<< HEAD
     var url = '{{ .Page.Site.BaseURL }}'.replace(/\/$/, '') + path;
 
     var qr = generateQR(url);
     var canvas = document.getElementById('qr-canvas');
     renderQR(canvas, qr, size);
+=======
+    var url = '{{ .Page.Site.BaseURL }}' .replace(/\/$/, '') + path;
+
+    var qr = generateQR(url);
+    var pixelSize = Math.max(1, Math.floor(size / (qr.size + 8)));
+    var canvas = document.getElementById('qr-canvas');
+    renderQR(canvas, qr, pixelSize);
+>>>>>>> bb579cc (add promo page and QR generator)
 
     var link = document.getElementById('qr-download');
     link.href = canvas.toDataURL('image/png');
     var pageName = document.getElementById('qr-path').selectedOptions[0].text.toLowerCase().replace(/\s+/g, '-');
+<<<<<<< HEAD
     console.log(size);
     link.download = 'country-club-qr-' + pageName + '-' + size + 'x' + size + '.png';
+=======
+    link.download = 'country-club-qr-' + pageName + '.png';
+>>>>>>> bb579cc (add promo page and QR generator)
   }
 
   document.getElementById('qr-path').addEventListener('change', update);
   document.getElementById('qr-size').addEventListener('change', update);
+<<<<<<< HEAD
   // Initial render after page load (font/logo may arrive later and re-trigger)
+=======
+>>>>>>> bb579cc (add promo page and QR generator)
   update();
 })();
 </script>
