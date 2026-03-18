@@ -1,0 +1,108 @@
+{{ $name := .Get "name" }}
+{{ $icon := .Get "icon" }}
+{{ $type := .Get "type" | default "lead" }}
+<div class="role-card" data-role-type="{{ $type }}" onclick="openRoleModal(this)">
+  <div class="role-icon">
+    <svg viewBox="0 0 48 48" fill="none" stroke="url(#role-icon-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      {{ if eq $icon "hammer" }}
+      <!-- Hammer -->
+      <path d="M18 6h12v8H18z"/>
+      <path d="M24 14v28"/>
+      <path d="M20 42h8"/>
+      {{ else if eq $icon "palette" }}
+      <!-- Art palette -->
+      <path d="M24 4C12 4 4 14 4 24c0 8 5 14 12 16 2 .5 3-1 2-3-1-1.5-.5-3.5 2-3.5h4c6 0 10-3 10-8 0-12-6-21.5-10-21.5z"/>
+      <circle cx="16" cy="18" r="2.5"/>
+      <circle cx="24" cy="12" r="2.5"/>
+      <circle cx="32" cy="18" r="2.5"/>
+      <circle cx="14" cy="28" r="2.5"/>
+      {{ else if eq $icon "gate" }}
+      <!-- Gate / door -->
+      <path d="M8 42V10a2 2 0 012-2h10v34"/>
+      <path d="M28 42V8h10a2 2 0 012 2v32"/>
+      <path d="M4 42h40"/>
+      <circle cx="17" cy="26" r="1.5"/>
+      <circle cx="31" cy="26" r="1.5"/>
+      {{ else if eq $icon "car" }}
+      <!-- Car -->
+      <path d="M10 30h28l-3-10H13z"/>
+      <path d="M6 30a4 4 0 014-4h28a4 4 0 014 4v6H6z"/>
+      <circle cx="14" cy="36" r="3"/>
+      <circle cx="34" cy="36" r="3"/>
+      <path d="M6 36h5M31 36h12"/>
+      {{ else if eq $icon "medical" }}
+      <!-- Medical cross -->
+      <path d="M18 8h12v12h10v8H30v12H18V28H8v-8h10z"/>
+      {{ else if eq $icon "leaf" }}
+      <!-- Leaf -->
+      <path d="M24 42V24"/>
+      <path d="M8 8c0 20 8 30 16 34C32 38 40 28 40 8 30 8 24 12 24 12S18 8 8 8z"/>
+      <path d="M14 22c4-2 7-2 10 2"/>
+      {{ else if eq $icon "flame" }}
+      <!-- Flame -->
+      <path d="M24 4c0 8-12 14-12 24a12 12 0 0024 0C36 18 24 12 24 4z"/>
+      <path d="M24 44a5 5 0 005-5c0-5-5-8-5-12 0 4-5 7-5 12a5 5 0 005 5z"/>
+      {{ else if eq $icon "fire-spin" }}
+      <!-- Fire performer / spinning -->
+      <circle cx="24" cy="24" r="16"/>
+      <circle cx="24" cy="24" r="4"/>
+      <path d="M24 8v-4M24 44v-4M8 24H4M44 24h-4"/>
+      <path d="M12.7 12.7L9.9 9.9M35.3 35.3l-2.8-2.8M12.7 35.3l-2.8 2.8M35.3 12.7l2.8-2.8"/>
+      {{ else if eq $icon "wrench" }}
+      <!-- Wrench -->
+      <path d="M14 4a10 10 0 0112 12L14 28l-6-6L20 10"/>
+      <path d="M14 28l-8 8a3 3 0 004 4l8-8"/>
+      <path d="M34 44a10 10 0 01-12-12l12-12 6 6-12 12"/>
+      <path d="M34 44l8-8a3 3 0 00-4-4l-8 8"/>
+      {{ else if eq $icon "box" }}
+      <!-- Box with arrow -->
+      <path d="M8 16h32v24H8z"/>
+      <path d="M4 16l20-12 20 12"/>
+      <path d="M24 28v-16"/>
+      <path d="M18 18l6-6 6 6"/>
+      {{ else if eq $icon "compass" }}
+      <!-- Compass -->
+      <circle cx="24" cy="24" r="18"/>
+      <circle cx="24" cy="24" r="3"/>
+      <path d="M24 9v6M24 33v6M9 24h6M33 24h6"/>
+      <polygon points="24,10 27,21 24,18 21,21"/>
+      <polygon points="24,38 21,27 24,30 27,27"/>
+      {{ else if eq $icon "music" }}
+      <!-- Music note / speaker -->
+      <path d="M8 18h6l10-8v28L14 30H8z"/>
+      <path d="M32 16a10 10 0 010 16"/>
+      <path d="M36 10a18 18 0 010 28"/>
+      {{ else if eq $icon "fuel" }}
+      <!-- Gas pump -->
+      <path d="M10 8h16v32H10z"/>
+      <path d="M10 42h18"/>
+      <path d="M14 8V4h8v4"/>
+      <path d="M14 18h8v8h-8z"/>
+      <path d="M26 14l8-6v24a3 3 0 01-6 0V26"/>
+      {{ else if eq $icon "truck" }}
+      <!-- Truck -->
+      <path d="M4 14h26v20H4z"/>
+      <path d="M30 22h8l6 8v4H30z"/>
+      <circle cx="12" cy="36" r="4"/>
+      <circle cx="38" cy="36" r="4"/>
+      <path d="M16 34h18"/>
+      {{ else if eq $icon "clipboard" }}
+      <!-- Clipboard -->
+      <path d="M12 6h24v36H12z"/>
+      <path d="M20 4h8v6h-8z"/>
+      <path d="M18 18h12M18 26h12M18 34h8"/>
+      {{ else if eq $icon "broom" }}
+      <!-- Broom -->
+      <path d="M24 4v24"/>
+      <path d="M14 28c0 12 4 16 10 16s10-4 10-16z"/>
+      <path d="M18 32v8M24 32v10M30 32v8"/>
+      {{ else if eq $icon "shield" }}
+      <!-- Shield -->
+      <path d="M24 4L6 12v12c0 12 8 18 18 20 10-2 18-8 18-20V12z"/>
+      <path d="M18 24l4 4 8-8"/>
+      {{ end }}
+    </svg>
+  </div>
+  <h4 class="role-name">{{ $name }}</h4>
+  <div class="role-description">{{ .Inner }}</div>
+</div>
