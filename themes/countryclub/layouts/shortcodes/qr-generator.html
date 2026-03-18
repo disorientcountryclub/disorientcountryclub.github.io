@@ -371,21 +371,43 @@
   }
 
   // ===== Gradient Canvas Renderer =====
+  var logoImg = new Image();
+  logoImg.crossOrigin = 'anonymous';
+  logoImg.src = '{{ "images/20260121.CCXiVVexillum.png" | relURL }}';
+  var logoLoaded = false;
+  logoImg.onload = function() { logoLoaded = true; update(); };
+
+  // Preload the Disorient font for canvas use
+  var fontReady = false;
+  var disorientFont = new FontFace('Disorient', "url('{{ "fonts/Disorient 2017.ttf" | relURL }}')");
+  disorientFont.load().then(function(loaded) {
+    document.fonts.add(loaded);
+    fontReady = true;
+    update();
+  }).catch(function() { fontReady = false; });
+
   function renderQR(canvas, qr, pixelSize) {
     var quiet = 4; // quiet zone modules
     var totalModules = qr.size + quiet * 2;
-    var canvasSize = totalModules * pixelSize;
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
+    var qrCanvasSize = totalModules * pixelSize;
+
+    // Extra space below QR for branded text
+    var textHeight = Math.round(qrCanvasSize * 0.12);
+    var textPadding = Math.round(qrCanvasSize * 0.03);
+    var canvasWidth = qrCanvasSize;
+    var canvasHeight = qrCanvasSize + textHeight + textPadding;
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
 
     var ctx = canvas.getContext('2d');
 
     // White background
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvasSize, canvasSize);
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
     // Create gradient for dark modules
-    var gradient = ctx.createLinearGradient(0, 0, canvasSize, canvasSize);
+    var gradient = ctx.createLinearGradient(0, 0, qrCanvasSize, qrCanvasSize);
     gradient.addColorStop(0, '#ff8800');
     gradient.addColorStop(1, '#ff0088');
     ctx.fillStyle = gradient;
@@ -400,13 +422,55 @@
         }
       }
     }
+
+    // === Center logo ===
+    if (logoLoaded) {
+      // Logo covers ~18% of QR width (safe for EC level M)
+      var logoSize = Math.round(qrCanvasSize * 0.15);
+      var logoPadding = Math.round(logoSize * 0.05);
+      var bgSize = logoSize + logoPadding * 2;
+      var cx = Math.round((qrCanvasSize - bgSize) / 2);
+      var cy = Math.round((qrCanvasSize - bgSize) / 2);
+
+      // White circle background to clear QR modules behind logo
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(qrCanvasSize / 2, qrCanvasSize / 2, bgSize / 2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw the vexillum logo centered
+      var lx = Math.round((qrCanvasSize - logoSize) / 2);
+      var ly = Math.round((qrCanvasSize - logoSize) / 2);
+      ctx.drawImage(logoImg, lx, ly, logoSize, logoSize);
+    }
+
+    // === Branded text below QR ===
+    var fontSize = Math.round(textHeight * 0.35);
+    var fontName = fontReady ? 'Disorient' : 'Orbitron, monospace';
+    ctx.font = fontSize + 'px ' + fontName;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Gradient text
+    var textGradient = ctx.createLinearGradient(
+      canvasWidth * 0.2, 0, canvasWidth * 0.8, 0
+    );
+    textGradient.addColorStop(0, '#ff8800');
+    textGradient.addColorStop(1, '#ff0088');
+    ctx.fillStyle = textGradient;
+
+    var textY = qrCanvasSize + textPadding + textHeight / 2;
+    ctx.fillText('COUNTRY CLUB CCXIV', canvasWidth / 2, textPadding * 1.5);
+    ctx.fillText('SECRET', canvasWidth / 2, textY - textPadding * 4.25);
+    ctx.fillText('UPSTATE LOCATION', canvasWidth / 2, textY - textPadding * 2.5);
+    ctx.fillText('MAY 21-25', canvasWidth / 2, textY);
   }
 
   // ===== UI =====
   function update() {
     var path = document.getElementById('qr-path').value;
     var size = parseInt(document.getElementById('qr-size').value);
-    var url = '{{ .Page.Site.BaseURL }}' .replace(/\/$/, '') + path;
+    var url = '{{ .Page.Site.BaseURL }}'.replace(/\/$/, '') + path;
 
     var qr = generateQR(url);
     var pixelSize = Math.max(1, Math.floor(size / (qr.size + 8)));
@@ -416,11 +480,13 @@
     var link = document.getElementById('qr-download');
     link.href = canvas.toDataURL('image/png');
     var pageName = document.getElementById('qr-path').selectedOptions[0].text.toLowerCase().replace(/\s+/g, '-');
-    link.download = 'country-club-qr-' + pageName + '.png';
+    console.log(size);
+    link.download = 'country-club-qr-' + pageName + '-' + size + 'x' + size + '.png';
   }
 
   document.getElementById('qr-path').addEventListener('change', update);
   document.getElementById('qr-size').addEventListener('change', update);
+  // Initial render after page load (font/logo may arrive later and re-trigger)
   update();
 })();
 </script>
