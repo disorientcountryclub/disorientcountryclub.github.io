@@ -26,3 +26,12 @@ Want to volunteer for Country Club? Unsure of what you can do? Do not fret, my f
 {{< img src="get-involved/IMG_9740.JPEG" alt="Get Involved" >}}
 {{< img src="get-involved/IMG_4985.JPEG" alt="Get Involved" >}}
 {{< /gallery >}}
+---
+
+## Promotion
+
+Help spread the word about Country Club! We have promotional assets you can use for social media, flyers, and more.
+
+&nbsp;
+
+- [PROMO TOOLKIT](/promo)

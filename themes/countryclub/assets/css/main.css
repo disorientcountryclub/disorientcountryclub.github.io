@@ -1201,6 +1201,88 @@ section h2 {
 }
 
 /* ===================================
+   QR CODE GENERATOR
+   =================================== */
+
+.qr-generator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin: 30px 0;
+}
+
+.qr-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.qr-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--pornj-orange);
+}
+
+.qr-input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 8px 14px;
+  background: rgba(10, 0, 21, 0.8);
+  color: var(--almost-white);
+  border: 1px solid var(--pornj-orange-1);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.qr-input:hover,
+.qr-input:focus {
+  border-color: var(--pornj-pink);
+  outline: none;
+}
+
+.qr-output {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 40px var(--pornj-pink);
+}
+
+.qr-output canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.qr-download-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, var(--pornj-orange), var(--pornj-pink));
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.qr-download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 40px var(--pornj-pink);
+  border-color: var(--pornj-orange);
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* ===================================
    FOOTER
    =================================== */
 

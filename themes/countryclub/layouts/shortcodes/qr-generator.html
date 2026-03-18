@@ -1,0 +1,426 @@
+<div class="qr-generator">
+  <div class="qr-controls">
+    <label class="qr-label" for="qr-path">Page</label>
+    <select id="qr-path" class="qr-input">
+      <option value="/">Home</option>
+      <option value="/get-involved/">Get Involved</option>
+      <option value="/lineup/">Lineup</option>
+      <option value="/art/">Art</option>
+      <option value="/camps/">Camps</option>
+      <option value="/guide/">Guide</option>
+      <option value="/announcements/">Announcements</option>
+    </select>
+    <label class="qr-label" for="qr-size">Size</label>
+    <select id="qr-size" class="qr-input">
+      <option value="256">256px</option>
+      <option value="512" selected>512px</option>
+      <option value="1024">1024px</option>
+    </select>
+  </div>
+  <div class="qr-output">
+    <canvas id="qr-canvas"></canvas>
+  </div>
+  <a id="qr-download" class="qr-download-btn" download="country-club-qr.png">Download PNG</a>
+</div>
+
+<script>
+// Minimal QR Code generator - supports alphanumeric mode, error correction level M
+// Based on QR Code specification ISO/IEC 18004
+(function() {
+  // QR code generator using canvas
+  // We'll use a compact QR encoding implementation
+
+  // ===== QR Code Matrix Generator =====
+  // Galois field arithmetic for QR error correction
+  var GF256_EXP = new Array(256);
+  var GF256_LOG = new Array(256);
+  (function() {
+    var v = 1;
+    for (var i = 0; i < 255; i++) {
+      GF256_EXP[i] = v;
+      GF256_LOG[v] = i;
+      v <<= 1;
+      if (v >= 256) v ^= 0x11d;
+    }
+    GF256_EXP[255] = GF256_EXP[0];
+  })();
+
+  function gfMul(a, b) {
+    if (a === 0 || b === 0) return 0;
+    return GF256_EXP[(GF256_LOG[a] + GF256_LOG[b]) % 255];
+  }
+
+  function polyMul(a, b) {
+    var result = new Array(a.length + b.length - 1).fill(0);
+    for (var i = 0; i < a.length; i++)
+      for (var j = 0; j < b.length; j++)
+        result[i + j] ^= gfMul(a[i], b[j]);
+    return result;
+  }
+
+  function polyRemainder(dividend, divisor) {
+    var result = dividend.slice();
+    for (var i = 0; i < dividend.length - divisor.length + 1; i++) {
+      if (result[i] === 0) continue;
+      for (var j = 1; j < divisor.length; j++)
+        result[i + j] ^= gfMul(divisor[j], result[i]);
+    }
+    return result.slice(dividend.length - divisor.length + 1);
+  }
+
+  function getGeneratorPoly(degree) {
+    var poly = [1];
+    for (var i = 0; i < degree; i++)
+      poly = polyMul(poly, [1, GF256_EXP[i]]);
+    return poly;
+  }
+
+  // QR version capacities for EC level M (byte mode)
+  var VERSION_CAPACITIES = [0,16,28,44,64,86,108,124,154,182,216,254,290,334,365,412,450,504,560,624,666];
+  var EC_CODEWORDS = [0,10,16,26,18,24,16,18,22,22,26,30,22,22,24,24,28,28,26,26,28];
+  var NUM_BLOCKS = [0,1,1,1,2,2,2,2,2,2,4,4,4,4,4,4,4,4,4,4,4]; // simplified
+
+  function getVersion(dataLen) {
+    for (var v = 1; v <= 20; v++) {
+      if (dataLen <= VERSION_CAPACITIES[v]) return v;
+    }
+    return 20;
+  }
+
+  function encodeData(text) {
+    // Byte mode encoding
+    var data = [];
+    // Mode indicator: 0100 (byte mode)
+    var bits = [];
+
+    function pushBits(value, count) {
+      for (var i = count - 1; i >= 0; i--)
+        bits.push((value >> i) & 1);
+    }
+
+    var byteData = [];
+    for (var i = 0; i < text.length; i++) {
+      var c = text.charCodeAt(i);
+      if (c < 128) byteData.push(c);
+      else if (c < 2048) {
+        byteData.push(0xc0 | (c >> 6));
+        byteData.push(0x80 | (c & 0x3f));
+      }
+    }
+
+    var version = getVersion(byteData.length);
+    var charCountBits = version <= 9 ? 8 : 16;
+
+    pushBits(4, 4); // byte mode
+    pushBits(byteData.length, charCountBits);
+
+    for (var i = 0; i < byteData.length; i++)
+      pushBits(byteData[i], 8);
+
+    var totalDataCodewords = VERSION_CAPACITIES[version] + (version <= 9 ? 0 : 0);
+    // Calculate total data bits
+    var size = 17 + version * 4;
+    var totalModules = size * size;
+    // Approximate total codewords
+    var totalCodewords = Math.floor(totalModules / 8) - (version <= 1 ? 36 : version <= 6 ? 60 : 100); // rough
+    // Use lookup
+    var ecCodewords = EC_CODEWORDS[version];
+    var dataCodewords = VERSION_CAPACITIES[version];
+
+    // Add terminator
+    var totalBitsNeeded = dataCodewords * 8;
+    var terminatorLen = Math.min(4, totalBitsNeeded - bits.length);
+    for (var i = 0; i < terminatorLen; i++) bits.push(0);
+
+    // Pad to byte boundary
+    while (bits.length % 8 !== 0) bits.push(0);
+
+    // Pad with 0xEC, 0x11
+    var padBytes = [0xEC, 0x11];
+    var padIdx = 0;
+    while (bits.length < totalBitsNeeded) {
+      pushBits(padBytes[padIdx % 2], 8);
+      padIdx++;
+    }
+
+    // Convert bits to bytes
+    var codewords = [];
+    for (var i = 0; i < bits.length; i += 8) {
+      var byte = 0;
+      for (var j = 0; j < 8; j++) byte = (byte << 1) | (bits[i + j] || 0);
+      codewords.push(byte);
+    }
+
+    // Generate error correction
+    var genPoly = getGeneratorPoly(ecCodewords);
+    var msgPoly = new Array(codewords.length + ecCodewords).fill(0);
+    for (var i = 0; i < codewords.length; i++) msgPoly[i] = codewords[i];
+    var ecData = polyRemainder(msgPoly, genPoly);
+
+    return { version: version, data: codewords.concat(ecData), size: size, ecCodewords: ecCodewords };
+  }
+
+  function createMatrix(version) {
+    var size = 17 + version * 4;
+    var matrix = [];
+    var reserved = [];
+    for (var i = 0; i < size; i++) {
+      matrix[i] = new Array(size).fill(0);
+      reserved[i] = new Array(size).fill(false);
+    }
+
+    function setModule(row, col, value) {
+      if (row >= 0 && row < size && col >= 0 && col < size) {
+        matrix[row][col] = value ? 1 : 0;
+        reserved[row][col] = true;
+      }
+    }
+
+    // Finder patterns
+    function drawFinder(row, col) {
+      for (var r = -1; r <= 7; r++) {
+        for (var c = -1; c <= 7; c++) {
+          var val = false;
+          if (r >= 0 && r <= 6 && c >= 0 && c <= 6) {
+            val = (r === 0 || r === 6 || c === 0 || c === 6 ||
+                   (r >= 2 && r <= 4 && c >= 2 && c <= 4));
+          }
+          setModule(row + r, col + c, val);
+        }
+      }
+    }
+
+    drawFinder(0, 0);
+    drawFinder(0, size - 7);
+    drawFinder(size - 7, 0);
+
+    // Timing patterns
+    for (var i = 8; i < size - 8; i++) {
+      setModule(6, i, i % 2 === 0);
+      setModule(i, 6, i % 2 === 0);
+    }
+
+    // Alignment patterns (for version >= 2)
+    if (version >= 2) {
+      var alignPos = getAlignmentPositions(version);
+      for (var i = 0; i < alignPos.length; i++) {
+        for (var j = 0; j < alignPos.length; j++) {
+          var r = alignPos[i], c = alignPos[j];
+          if (reserved[r][c]) continue;
+          for (var dr = -2; dr <= 2; dr++) {
+            for (var dc = -2; dc <= 2; dc++) {
+              var val = (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0));
+              setModule(r + dr, c + dc, val);
+            }
+          }
+        }
+      }
+    }
+
+    // Reserve format info areas
+    for (var i = 0; i < 8; i++) {
+      if (!reserved[8][i]) { reserved[8][i] = true; }
+      if (!reserved[i][8]) { reserved[i][8] = true; }
+      if (!reserved[8][size - 1 - i]) { reserved[8][size - 1 - i] = true; }
+      if (!reserved[size - 1 - i][8]) { reserved[size - 1 - i][8] = true; }
+    }
+    reserved[8][8] = true;
+    // Dark module
+    setModule(size - 8, 8, true);
+
+    // Version info (version >= 7)
+    if (version >= 7) {
+      var versionBits = getVersionBits(version);
+      for (var i = 0; i < 18; i++) {
+        var bit = (versionBits >> i) & 1;
+        var r = Math.floor(i / 3);
+        var c = size - 11 + (i % 3);
+        setModule(r, c, bit);
+        setModule(c, r, bit);
+      }
+    }
+
+    return { matrix: matrix, reserved: reserved, size: size };
+  }
+
+  function getAlignmentPositions(version) {
+    if (version === 1) return [];
+    var positions = [6];
+    var last = 17 + version * 4 - 7;
+    var count = Math.floor(version / 7) + 2;
+    var step = Math.ceil((last - 6) / (count - 1));
+    step = Math.ceil(step / 2) * 2; // round to even
+    for (var pos = last; pos > 6; pos -= step)
+      positions.splice(1, 0, pos);
+    return positions;
+  }
+
+  function getVersionBits(version) {
+    var rem = version;
+    for (var i = 0; i < 12; i++) rem = (rem << 1) ^ ((rem >> 11) * 0x1F25);
+    return (version << 12) | rem;
+  }
+
+  function placeData(matrixInfo, data) {
+    var size = matrixInfo.size;
+    var matrix = matrixInfo.matrix;
+    var reserved = matrixInfo.reserved;
+
+    var bitIndex = 0;
+    var totalBits = data.length * 8;
+
+    // Place data bits
+    var upward = true;
+    for (var col = size - 1; col >= 1; col -= 2) {
+      if (col === 6) col = 5; // skip timing column
+      for (var i = 0; i < size; i++) {
+        var row = upward ? size - 1 - i : i;
+        for (var dc = 0; dc <= 1; dc++) {
+          var c = col - dc;
+          if (reserved[row][c]) continue;
+          if (bitIndex < totalBits) {
+            var byteIdx = Math.floor(bitIndex / 8);
+            var bitPos = 7 - (bitIndex % 8);
+            matrix[row][c] = (data[byteIdx] >> bitPos) & 1;
+            bitIndex++;
+          }
+        }
+      }
+      upward = !upward;
+    }
+  }
+
+  function applyMask(matrix, reserved, size, maskNum) {
+    var maskFn;
+    switch(maskNum) {
+      case 0: maskFn = function(r,c) { return (r+c)%2===0; }; break;
+      case 1: maskFn = function(r,c) { return r%2===0; }; break;
+      case 2: maskFn = function(r,c) { return c%3===0; }; break;
+      case 3: maskFn = function(r,c) { return (r+c)%3===0; }; break;
+      case 4: maskFn = function(r,c) { return (Math.floor(r/2)+Math.floor(c/3))%2===0; }; break;
+      case 5: maskFn = function(r,c) { return (r*c)%2+(r*c)%3===0; }; break;
+      case 6: maskFn = function(r,c) { return ((r*c)%2+(r*c)%3)%2===0; }; break;
+      case 7: maskFn = function(r,c) { return ((r+c)%2+(r*c)%3)%2===0; }; break;
+    }
+    for (var r = 0; r < size; r++)
+      for (var c = 0; c < size; c++)
+        if (!reserved[r][c] && maskFn(r,c))
+          matrix[r][c] ^= 1;
+  }
+
+  function applyFormatInfo(matrix, size, maskNum) {
+    // EC level M = 0, mask pattern
+    var ecLevel = 0; // M
+    var formatData = (ecLevel << 3) | maskNum;
+    var rem = formatData;
+    for (var i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >> 9) * 0x537);
+    var formatBits = ((formatData << 10) | rem) ^ 0x5412;
+
+    // Place format bits
+    for (var i = 0; i < 6; i++) matrix[8][i] = (formatBits >> (14-i)) & 1;
+    matrix[8][7] = (formatBits >> 8) & 1;
+    matrix[8][8] = (formatBits >> 7) & 1;
+    matrix[7][8] = (formatBits >> 6) & 1;
+    for (var i = 0; i < 6; i++) matrix[5-i][8] = (formatBits >> (5-i)) & 1;
+
+    for (var i = 0; i < 7; i++) matrix[size-1-i][8] = (formatBits >> (14-i)) & 1;
+    for (var i = 0; i < 8; i++) matrix[8][size-8+i] = (formatBits >> (7-i)) & 1;
+  }
+
+  function calculatePenalty(matrix, size) {
+    var penalty = 0;
+    // Rule 1: runs of same color
+    for (var r = 0; r < size; r++) {
+      var count = 1;
+      for (var c = 1; c < size; c++) {
+        if (matrix[r][c] === matrix[r][c-1]) { count++; }
+        else { if (count >= 5) penalty += count - 2; count = 1; }
+      }
+      if (count >= 5) penalty += count - 2;
+    }
+    for (var c = 0; c < size; c++) {
+      var count = 1;
+      for (var r = 1; r < size; r++) {
+        if (matrix[r][c] === matrix[r-1][c]) { count++; }
+        else { if (count >= 5) penalty += count - 2; count = 1; }
+      }
+      if (count >= 5) penalty += count - 2;
+    }
+    // Rule 2: 2x2 blocks
+    for (var r = 0; r < size-1; r++)
+      for (var c = 0; c < size-1; c++)
+        if (matrix[r][c]===matrix[r][c+1] && matrix[r][c]===matrix[r+1][c] && matrix[r][c]===matrix[r+1][c+1])
+          penalty += 3;
+    return penalty;
+  }
+
+  function generateQR(text) {
+    var encoded = encodeData(text);
+    var best = null, bestPenalty = Infinity;
+
+    for (var mask = 0; mask < 8; mask++) {
+      var mi = createMatrix(encoded.version);
+      placeData(mi, encoded.data);
+      applyMask(mi.matrix, mi.reserved, mi.size, mask);
+      applyFormatInfo(mi.matrix, mi.size, mask);
+      var p = calculatePenalty(mi.matrix, mi.size);
+      if (p < bestPenalty) { bestPenalty = p; best = mi.matrix; }
+    }
+
+    return { matrix: best, size: encoded.size };
+  }
+
+  // ===== Gradient Canvas Renderer =====
+  function renderQR(canvas, qr, pixelSize) {
+    var quiet = 4; // quiet zone modules
+    var totalModules = qr.size + quiet * 2;
+    var canvasSize = totalModules * pixelSize;
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+
+    var ctx = canvas.getContext('2d');
+
+    // White background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvasSize, canvasSize);
+
+    // Create gradient for dark modules
+    var gradient = ctx.createLinearGradient(0, 0, canvasSize, canvasSize);
+    gradient.addColorStop(0, '#ff8800');
+    gradient.addColorStop(1, '#ff0088');
+    ctx.fillStyle = gradient;
+
+    // Draw modules
+    for (var r = 0; r < qr.size; r++) {
+      for (var c = 0; c < qr.size; c++) {
+        if (qr.matrix[r][c]) {
+          var x = (c + quiet) * pixelSize;
+          var y = (r + quiet) * pixelSize;
+          ctx.fillRect(x, y, pixelSize, pixelSize);
+        }
+      }
+    }
+  }
+
+  // ===== UI =====
+  function update() {
+    var path = document.getElementById('qr-path').value;
+    var size = parseInt(document.getElementById('qr-size').value);
+    var url = '{{ .Page.Site.BaseURL }}' .replace(/\/$/, '') + path;
+
+    var qr = generateQR(url);
+    var pixelSize = Math.max(1, Math.floor(size / (qr.size + 8)));
+    var canvas = document.getElementById('qr-canvas');
+    renderQR(canvas, qr, pixelSize);
+
+    var link = document.getElementById('qr-download');
+    link.href = canvas.toDataURL('image/png');
+    var pageName = document.getElementById('qr-path').selectedOptions[0].text.toLowerCase().replace(/\s+/g, '-');
+    link.download = 'country-club-qr-' + pageName + '.png';
+  }
+
+  document.getElementById('qr-path').addEventListener('change', update);
+  document.getElementById('qr-size').addEventListener('change', update);
+  update();
+})();
+</script>
