@@ -386,10 +386,13 @@
     update();
   }).catch(function() { fontReady = false; });
 
-  function renderQR(canvas, qr, pixelSize) {
+  function renderQR(canvas, qr, targetSize) {
     var quiet = 4; // quiet zone modules
     var totalModules = qr.size + quiet * 2;
-    var qrCanvasSize = totalModules * pixelSize;
+
+    // Fixed canvas width = targetSize; compute pixelSize to fit
+    var qrCanvasSize = targetSize;
+    var pixelSize = targetSize / totalModules;
 
     // Extra space below QR for branded text
     var textHeight = Math.round(qrCanvasSize * 0.12);
@@ -412,25 +415,24 @@
     gradient.addColorStop(1, '#ff0088');
     ctx.fillStyle = gradient;
 
-    // Draw modules
+    // Draw modules (use fractional pixel sizes for consistent canvas dimensions)
     for (var r = 0; r < qr.size; r++) {
       for (var c = 0; c < qr.size; c++) {
         if (qr.matrix[r][c]) {
           var x = (c + quiet) * pixelSize;
           var y = (r + quiet) * pixelSize;
-          ctx.fillRect(x, y, pixelSize, pixelSize);
+          // Snap to pixel grid to avoid gaps
+          ctx.fillRect(Math.floor(x), Math.floor(y),
+            Math.ceil(pixelSize), Math.ceil(pixelSize));
         }
       }
     }
 
     // === Center logo ===
     if (logoLoaded) {
-      // Logo covers ~18% of QR width (safe for EC level M)
       var logoSize = Math.round(qrCanvasSize * 0.15);
       var logoPadding = Math.round(logoSize * 0.05);
       var bgSize = logoSize + logoPadding * 2;
-      var cx = Math.round((qrCanvasSize - bgSize) / 2);
-      var cy = Math.round((qrCanvasSize - bgSize) / 2);
 
       // White circle background to clear QR modules behind logo
       ctx.fillStyle = '#ffffff';
@@ -473,9 +475,8 @@
     var url = '{{ .Page.Site.BaseURL }}'.replace(/\/$/, '') + path;
 
     var qr = generateQR(url);
-    var pixelSize = Math.max(1, Math.floor(size / (qr.size + 8)));
     var canvas = document.getElementById('qr-canvas');
-    renderQR(canvas, qr, pixelSize);
+    renderQR(canvas, qr, size);
 
     var link = document.getElementById('qr-download');
     link.href = canvas.toDataURL('image/png');
