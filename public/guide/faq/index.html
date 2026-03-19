@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="/css/main.7203271452c52214d3883f52fe8252c6b8ee6a8007a011df8892576c288b85ff.css">
+  <link rel="stylesheet" href="/css/main.bcd91a226922e70939853f8ea820a0554730b373fffc75a6fc6d994f441df67c.css">
 </head>
 
   <body>
@@ -141,6 +141,13 @@
     <div id="image-modal" class="image-modal" onclick="this.classList.remove('active')">
       <img id="modal-img" src="" alt="">
     </div>
+    <div id="role-modal" class="role-modal" onclick="this.classList.remove('active')">
+      <div class="role-modal-content" onclick="document.getElementById('role-modal').classList.remove('active')">
+        <div id="role-modal-icon" class="role-modal-icon"></div>
+        <div id="role-modal-name" class="role-modal-name"></div>
+        <div id="role-modal-desc" class="role-modal-desc"></div>
+      </div>
+    </div>
     <script>
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('content-image')) {
@@ -149,9 +156,19 @@
         modal.classList.add('active');
       }
     });
+    function openRoleModal(card) {
+      var icon = card.querySelector('.role-icon').innerHTML;
+      var name = card.querySelector('.role-name').textContent;
+      var desc = card.querySelector('.role-description').innerHTML;
+      document.getElementById('role-modal-icon').innerHTML = icon;
+      document.getElementById('role-modal-name').textContent = name;
+      document.getElementById('role-modal-desc').innerHTML = desc;
+      document.getElementById('role-modal').classList.add('active');
+    }
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         document.getElementById('image-modal').classList.remove('active');
+        document.getElementById('role-modal').classList.remove('active');
       }
     });
     </script>

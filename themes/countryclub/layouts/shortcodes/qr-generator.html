@@ -481,7 +481,6 @@
     var link = document.getElementById('qr-download');
     link.href = canvas.toDataURL('image/png');
     var pageName = document.getElementById('qr-path').selectedOptions[0].text.toLowerCase().replace(/\s+/g, '-');
-    console.log(size);
     link.download = 'country-club-qr-' + pageName + '-' + size + 'x' + size + '.png';
   }
 
