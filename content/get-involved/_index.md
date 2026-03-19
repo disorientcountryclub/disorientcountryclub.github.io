@@ -32,7 +32,7 @@ Want to volunteer for Country Club? Unsure of what you can do? Do not fret, my f
 
 ## Volunteering
 
-Our community considers volunteering to be a Gift to the community, an example of Communal Effort, and a show of Civic Responsibility — three of the 10 Burning Man Principles. It also opens the door to new friendships that carry on throughout the event and into the default world, and gives us a chance to feel a sense of pride when we look around and say "I helped to make that possible!"
+Our community considers volunteering to be a gift to the community. It also opens the door to new friendships that carry on throughout the event and into the default world, and gives us a chance to feel a sense of pride when we look around and say "I helped to make that possible!"
 
 &nbsp;
 
