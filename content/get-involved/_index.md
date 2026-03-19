@@ -36,6 +36,7 @@ Our community considers volunteering to be a Gift to the community, an example o
 
 &nbsp;
 
+<!--
 ### Available Lead Roles
 
 {{< role-gallery >}}
@@ -49,7 +50,7 @@ Designs stages, chill spaces, and other common areas. May designate spaces to be
 {{< /role >}}
 
 {{< role name="Gate Lead" icon="gate" type="lead" >}}
-Train gate volunteers, ensure they show up for their shift and record their hours, cover shifts for no-shows. May involve ad hoc recruiting of more volunteers during the event. Works closely with Parking Lead.
+Train gate volunteers, ensure they show up for their shift and record their hours, cover shifts for no-shows. May involve ad-hoc recruiting of more volunteers during the event. Works closely with Parking Lead.
 {{< /role >}}
 
 {{< role name="Parking Lead" icon="car" type="lead" >}}
@@ -88,20 +89,22 @@ A multi-day role for a seasoned Country Club camper who is very familiar with th
 
 &nbsp;
 
+-->
+
 ### Volunteer Roles
 
 {{< role-gallery >}}
 
 {{< role name="Alpha" icon="hammer" type="volunteer" >}}
-Ad hoc building (erecting tents, building Zero G chairs, light woodworking), laying down tarps, hanging items, moving equipment, decorating, and getting materials from the on-site storage container.
+Ad-hoc building (erecting tents, building Zero G chairs, light woodworking), laying down tarps, hanging items, moving equipment, decorating, getting materials from the storage container (on-site) and bringing them into proper set-up locations.
 {{< /role >}}
 
 {{< role name="Art" icon="palette" type="volunteer" >}}
-Alpha volunteers who assist the decoration of the event including setting up fabric, stages, signage, LED installations, and decorating common areas. May also assist artists setting up their work.
+Alpha volunteers who assist the decoration of the event including setting up fabric, stages, signage, LED installations, and decorate event common areas. May also assist artists set up their work at the event (as needed).
 {{< /role >}}
 
 {{< role name="Gate" icon="gate" type="volunteer" >}}
-Greet new arrivals, check photo identification against the guest list, explain event details, and direct them to drop off gear and park. Ad hoc recruiting of open volunteer shifts.
+Greet new arrivals, check their photo identification against the guest list, explain event details to them, and direct them to drop off their gear and return to parking to park their car. Ad-hoc recruiting of open volunteer shifts across the events. This role will often overlap with parking and assist parking cars when needed.
 {{< /role >}}
 
 {{< role name="Parking" icon="car" type="volunteer" >}}
@@ -109,32 +112,33 @@ Ensure cars park appropriately in the lot, close to each other to maximize space
 {{< /role >}}
 
 {{< role name="Medical" icon="medical" type="volunteer" >}}
-For trained medical professionals. On call, carrying a radio for a shift during the event and responding to emergencies as they arise.
+This role is for trained medical professionals (doctors, nurses, EMS, first aid responders, etc.), and will involve being on call, carrying a radio for a shift during the event and responding to emergencies as they arise. Check-in start of shift at radio station.
 {{< /role >}}
 
 {{< role name="Stage" icon="music" type="volunteer" >}}
-Best for those with DJ/sound experience. Greet DJs before their sets, answer questions about equipment, and liaise with Sound Lead when escalations arise. Carries a radio while on shift.
+This role is best for those with DJ/sound experience. Greet DJs before they begin their sets, answer questions about equipment, liaison to Sound Lead when escalations arise, this role carries a radio while on shift. Check-in start of shift at radio station.
 {{< /role >}}
 
 {{< role name="LNT" icon="broom" type="volunteer" >}}
-Work with the LNT Lead conducting MOOP sweeps, gathering trash and recycling for removal from the property.
+Alpha and Disengage volunteers will work with the LNT lead conducting MOOP sweeps, gathering trash and recycling for removal from the property. Volunteers during the event may also be asked to conduct MOOP sweeps during their volunteer shifts during any non-busy time.
 {{< /role >}}
 
 {{< role name="Fire" icon="shield" type="volunteer" >}}
-Stand perimeter for Temple Burn to ensure attendees do not cross the perimeter. Move attendees further back as needed.
+Fire Volunteers: Stand perimeter for Temple Burn to ensure that attendees do not cross the perimeter. Moves attendees further back as needed if the fire is burning hotter or falls in an unanticipated manner and needs more space to burn safely.
 {{< /role >}}
 
 {{< role name="Disengage" icon="box" type="volunteer" >}}
-Removal of all temporary structures, decorations, lighting, and moving materials back to the storage container. Cleans production house and conducts MOOP sweeps.
+Removal of all temporary structures, decorations, lighting, etc. and moving all materials back to the storage container (on-site), at the direction of the Disengage Lead. Cleans production house and conducts MOOP (Matter-Out-Of-Place) sweeps throughout the property to ensure no trash/recycling is left behind and all temporary markers (construction tape, theme camp flags, road signs etc.) are removed and stowed away.
 {{< /role >}}
 
-{{< role name="Gas & Supply" icon="fuel" type="volunteer" >}}
-Drive your own vehicle off-site to pick up gas for generators each day. Check in at radio station at noon each day.
-{{< /role >}}
+<!-- {{< role name="Gas & Supply" icon="fuel" type="volunteer" >}}
+Drives own vehicle off-site to pick up gas (regular and/or diesel) for generators each day of the event as needed. Check-in at radio station each day at noon each day to determine need.
+{{< /role >}} -->
 
-{{< role name="Truck Driver" icon="truck" type="volunteer" >}}
-Pick up rental truck, drive to Brooklyn warehouse to load, then drive to the event site. After the event, drive the rental truck back to Brooklyn warehouse to unload, then return the truck.
-{{< /role >}}
+<!-- {{< role name="Truck Driver" icon="truck" type="volunteer" >}}
+Pick up rental truck and drive it to Brooklyn warehouse to load, and then drive it to the event before the event starts.
+After Disengage is complete, drive the rental truck from the event back to the Brooklyn warehouse to unload, and then back to the rental location to return.
+{{< /role >}} -->
 
 {{< /role-gallery >}}
 
