@@ -20,7 +20,6 @@
 {{- if not $djs }}{{ errorf "Missing page: content/lineup/djs.md" }}{{ end -}}
 {{- if not $vjs }}{{ errorf "Missing page: content/lineup/vjs.md" }}{{ end -}}
 {{- if not $involved }}{{ errorf "Missing page: content/get-involved/_index.md" }}{{ end -}}
-{{- if not $temple }}{{ errorf "Missing page: content/temple/_index.md (create with title, creators, wiki_link, temple_images)" }}{{ end -}}
 {{- if not $directions }}{{ errorf "Missing page: content/guide/directions.md (create with driving, flying, bus, train, etc. content)" }}{{ end -}}
 
 {{/* --- Validate required frontmatter on content/_index.md ---
@@ -134,9 +133,10 @@
 {{- $artPages := where .Site.RegularPages "Section" "art" -}}
 {{- if not $artPages }}{{ errorf "No art adventure pages found in content/art/ (create .md files with title, creators, wiki_link)" }}{{ end -}}
 
-{{/* --- Validate temple page ---
+{{/* --- Temple page (optional) ---
 
-  Expected frontmatter on content/temple/_index.md:
+  If content/temple/_index.md exists, it will be rendered.
+  Expected frontmatter:
 
   ---
   title: "The Thirteenth"
@@ -147,8 +147,6 @@
       wiki_link: "The_Thirteenth"
       width: 370
   ---
-
-  Optional body content about the temple.
 
 */}}
 {{- with $temple -}}
@@ -220,8 +218,9 @@ DISORIENT WIKI: {{ .wiki }}<BR>
 {{ with .Params.creators }}{{ . }}<br />{{ end }}
 {{ .Content }}
 {{ end }}
+{{ with $temple -}}
 ==TEMPLE==
-{{ with $temple -}}{{ $pageTitle := .Title }}
+{{ $pageTitle := .Title }}
 {{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }} by <I>{{ .Params.creators }}</I><BR>
 {{ range .Params.temple_images -}}
 [[Image:{{ .file }}|link={{ .wiki_link }}|{{ .width }}px]] {{ end }}<BR>

@@ -1,6 +1,6 @@
 ---
 title: "Self Reliance"
-weight: 3
+weight: 4
 ---
 
 ## Self Reliance

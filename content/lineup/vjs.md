@@ -1,7 +1,7 @@
 ---
 title: "VJ Lineup"
 venue: "Disorient Club House"
-artists:
+artists: []
   # - name: "THE SOURCE"
   # - name: "REBECCA NUVOLETTA"
   # - name: "JAYGO ISHKABIBBLE"

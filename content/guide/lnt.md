@@ -1,6 +1,6 @@
 ---
 title: "Leave No Trace"
-weight: 5
+weight: 6
 ---
 
 ### LNT Code of Conduct
