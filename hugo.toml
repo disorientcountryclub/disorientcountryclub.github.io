@@ -4,7 +4,7 @@ title = 'Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW'
 theme = 'countryclub'
 
 [mediaTypes."text/x-mediawiki"]
-  suffixes = ["html"]
+  suffixes = ["wiki"]
 
 [outputFormats.mediawiki]
   baseName = "2026"
