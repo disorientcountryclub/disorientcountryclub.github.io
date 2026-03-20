@@ -6,9 +6,16 @@
   See each section's comments for the expected frontmatter shape.
 */}}
 
-{{/* --- Helper: render page body as HTML, stripping Hugo shortcodes --- */}}
+{{/* --- Helper: render page body, stripping shortcodes and converting links to MediaWiki syntax --- */}}
 {{- define "wiki-content" -}}
-  {{- .RawContent | replaceRE `(?s)\{\{<[^>]*>\}\}` "" | replaceRE `(?s)\{\{%[^%]*%\}\}` "" | markdownify -}}
+  {{- $raw := .RawContent | replaceRE `(?s)\{\{<[^>]*>\}\}` "" | replaceRE `(?s)\{\{%[^%]*%\}\}` "" -}}
+  {{- $html := $raw | markdownify -}}
+  {{- $find := "href=\"/" -}}
+  {{- $repl := printf "href=\"%s" .Site.BaseURL -}}
+  {{- $html = replace $html $find $repl -}}
+  {{- $html = replaceRE `<a href="([^"]+)">([^<]+)</a>` "[$1 $2]" $html -}}
+  {{- $html = replaceRE `</?p>` "" $html -}}
+  {{- $html -}}
 {{- end -}}
 
 {{/* --- Page lookups --- */}}
@@ -72,7 +79,6 @@
 {{- if not .Params.mood_images }}{{ errorf "_index.md: missing 'mood_images' (array of image filenames)" }}{{ end -}}
 {{- if not .Params.tshirt_image }}{{ errorf "_index.md: missing 'tshirt_image'" }}{{ end -}}
 {{- if not .Params.escutcheon_images }}{{ errorf "_index.md: missing 'escutcheon_images' (array of {file, width})" }}{{ end -}}
-{{- if not .Params.areas_of_interest }}{{ errorf "_index.md: missing 'areas_of_interest' (array of {url, text})" }}{{ end -}}
 
 {{/* --- Validate required links in data/links.yaml ---
 
@@ -233,10 +239,12 @@ DISORIENT WIKI: {{ .wiki }}<BR>
 * {{ . }}<BR>
 {{ end }}
 
+{{ if .Params.areas_of_interest }}
 ==AREAS OF INTEREST==
 {{ range .Params.areas_of_interest -}}
 [{{ .url }} {{ .text }}]
 <BR>
+{{ end }}
 {{ end }}
 
 ==MOODS==

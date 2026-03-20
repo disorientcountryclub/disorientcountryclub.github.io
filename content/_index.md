@@ -32,13 +32,13 @@ general_info:
   - "1. Respect personal boundaries."
   - "2. Take responsibility for your own experience."
   - "The interplay of these two rules forms a social contract that makes our events safe places to explore your own boundaries while encouraging respect for each other. Talk to those around you about anything that makes you uncomfortable."
-areas_of_interest:
-  - url: "https://cs.uwaterloo.ca/~csk/spectre/"
-    text: "A chiral aperiodic monotile"
-  - url: "https://winterbloed.be/catalogue/"
-    text: "Winterbloed"
-  - url: "https://www.youtube.com/watch?v=QuaXXhuZdVk"
-    text: "RA; the Path of the Sun God"
+# areas_of_interest:
+#   - url: "https://cs.uwaterloo.ca/~csk/spectre/"
+#     text: "A chiral aperiodic monotile"
+#   - url: "https://winterbloed.be/catalogue/"
+#     text: "Winterbloed"
+#   - url: "https://www.youtube.com/watch?v=QuaXXhuZdVk"
+#     text: "RA; the Path of the Sun God"
 mood_images:
   - "CCWebsiteSplash_2026_v006.png"
 tshirt_image: "CCXiVTshirt.png"
