@@ -106,18 +106,11 @@
   lineup_image_width: 350
 
 */}}
-{{- with $djs -}}
-{{- if not .Params.artists }}{{ errorf "lineup/djs.md: missing or empty 'artists' array (uncomment and populate)" }}{{ end -}}
-{{- end -}}
-{{- with $vjs -}}
-{{- if not .Params.artists }}{{ errorf "lineup/vjs.md: missing or empty 'artists' array (uncomment and populate)" }}{{ end -}}
-{{- end -}}
-
 {{/* --- Validate camps exist --- */}}
 {{- $camps := where .Site.RegularPages "Section" "camps" -}}
 {{- if not $camps }}{{ errorf "No camp pages found in content/camps/ (create .md files with title, tagline, hours, events)" }}{{ end -}}
 
-{{/* --- Validate art adventures exist ---
+{{/* --- Art adventures (optional) ---
 
   Expected files in content/art/:
 
@@ -131,7 +124,6 @@
 
 */}}
 {{- $artPages := where .Site.RegularPages "Section" "art" -}}
-{{- if not $artPages }}{{ errorf "No art adventure pages found in content/art/ (create .md files with title, creators, wiki_link)" }}{{ end -}}
 
 {{/* --- Temple page (optional) ---
 
@@ -193,30 +185,32 @@ DISORIENT WIKI: {{ .wiki }}<BR>
 {{ with .facebook }}FACEBOOK: {{ . }}{{ end }}
 {{- end }}
 
+{{ with $djs }}{{ if .Params.artists }}
 ==DJ LINEUP==
-{{ with $djs -}}
 {{ with .Params.lineup_image }}[[Image:{{ . }}|right|350px]]{{ end }}
 {{ range .Params.artists -}}
 {{ .name }}<br />
 {{ end -}}
-{{ end }}
+{{ end }}{{ end }}
+{{ with $vjs }}{{ if .Params.artists }}
 ==VJ LINEUP==
-{{ with $vjs -}}
 {{ with .Params.lineup_image }}[[Image:{{ . }}|right|210px]]{{ end }}
 {{ range .Params.artists -}}
 {{ .name }}<br />
 {{ end -}}
-{{ end }}
+{{ end }}{{ end }}
 ==THEME CAMPS==
 {{ range $camps }}{{ $pageTitle := .Title }}
 ==={{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }}===
 {{ .Content }}
 {{ end }}
+{{ if $artPages }}
 ==ART ADVENTURES==
 {{ range $artPages }}{{ $pageTitle := .Title }}
 ==={{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }}===
 {{ with .Params.creators }}{{ . }}<br />{{ end }}
 {{ .Content }}
+{{ end }}
 {{ end }}
 {{ with $temple -}}
 ==TEMPLE==
