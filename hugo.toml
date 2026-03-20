@@ -7,7 +7,7 @@ theme = 'countryclub'
   suffixes = ["wiki"]
 
 [outputFormats.mediawiki]
-  baseName = "2026"
+  baseName = "disorient-country-club"
   mediaType = "text/x-mediawiki"
   isPlainText = true
   notAlternative = true
