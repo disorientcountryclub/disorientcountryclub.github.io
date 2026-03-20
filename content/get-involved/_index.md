@@ -12,14 +12,14 @@ Want to volunteer for Country Club? Unsure of what you can do? Do not fret, my f
 
 &nbsp;
 
-- [VOLUNTEER](https://tinyurl.com/4xwyzby7)
-- [SUBMIT ART](https://tinyurl.com/yc8ptjud)
-- [THEMECAMP PLACEMENT REQUEST](https://tinyurl.com/37u7hmr6)
-- [SUBMIT EVENT OR WORKSHOP TO SURVIVAL GUIDE](https://tinyurl.com/36vjnzer)
-<!-- - [FACEBOOK EVENT](https://example.com) -->
-- [DJ BOOKING](https://tinyurl.com/52k6nayf) (closes April 20th)
-- [VJ BOOKING](https://tinyurl.com/yss2p466)
-- [DISENGAGE](https://tinyurl.com/4xwyzby7)
+- [VOLUNTEER]({{< link "volunteer" >}})
+- [SUBMIT ART]({{< link "art_submission" >}})
+- [THEMECAMP PLACEMENT REQUEST]({{< link "themecamp" >}})
+- [SUBMIT EVENT OR WORKSHOP TO SURVIVAL GUIDE]({{< link "guide_submission" >}})
+<!-- - [FACEBOOK EVENT]({{< link "facebook" >}}) -->
+- [DJ BOOKING]({{< link "dj_booking" >}}) (closes April 20th)
+- [VJ BOOKING]({{< link "vj_booking" >}})
+- [DISENGAGE]({{< link "volunteer" >}})
 
 <!-- {{< gallery >}}
 {{< img src="get-involved/IMG_9608.JPEG" alt="Get Involved" >}}

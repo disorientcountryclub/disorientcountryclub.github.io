@@ -6,7 +6,7 @@ title: "Disorient Presents: Country Club XIIV - Presence and the Eternal Now"
 
 **SECRET LOCATION UPSTATE NEW YORK**
 
-[Get Tickets](https://events.humanitix.com/disorient-presents-country-club-xiv-presence-and-the-eternal-now)
+[Get Tickets]({{< link "ticket" >}})
 
 &nbsp;
 
