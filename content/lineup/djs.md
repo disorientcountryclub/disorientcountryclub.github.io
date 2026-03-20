@@ -1,7 +1,7 @@
 ---
 title: "DJ Lineup"
 venue: "Disorient Club House"
-artists:
+artists: []
   # - name: "PIPPI SONGDROPPING"
   # - name: "FLARED BASS"
   # - name: "TIM THE ENCHANTER"

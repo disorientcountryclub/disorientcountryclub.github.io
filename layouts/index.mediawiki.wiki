@@ -1,0 +1,266 @@
+{{/*
+  MediaWiki output template for Disorient Country Club wiki page.
+  Generates MediaWiki markup from Hugo content files.
+
+  Hugo will fail the build (via errorf) if required data is missing.
+  See each section's comments for the expected frontmatter shape.
+*/}}
+
+{{/* --- Helper: render page body, stripping shortcodes and converting links to MediaWiki syntax --- */}}
+{{- define "wiki-content" -}}
+  {{- $raw := .RawContent | replaceRE `(?s)\{\{<[^>]*>\}\}` "" | replaceRE `(?s)\{\{%[^%]*%\}\}` "" -}}
+  {{- $html := $raw | markdownify -}}
+  {{- $find := "href=\"/" -}}
+  {{- $repl := printf "href=\"%s" .Site.BaseURL -}}
+  {{- $html = replace $html $find $repl -}}
+  {{- $html = replaceRE `<a href="([^"]+)">([^<]+)</a>` "[$1 $2]" $html -}}
+  {{- $html = replaceRE `</?p>` "" $html -}}
+  {{- $html -}}
+{{- end -}}
+
+{{/* --- Page lookups --- */}}
+{{- $home := . -}}
+{{- $art := .Site.GetPage "/art" -}}
+{{- $djs := .Site.GetPage "/lineup/djs" -}}
+{{- $vjs := .Site.GetPage "/lineup/vjs" -}}
+{{- $involved := .Site.GetPage "/get-involved" -}}
+{{- $temple := .Site.GetPage "/temple" -}}
+{{- $directions := .Site.GetPage "/guide/directions" -}}
+
+{{/* --- Validate required pages exist --- */}}
+{{- if not $art }}{{ errorf "Missing page: content/art/_index.md" }}{{ end -}}
+{{- if not $djs }}{{ errorf "Missing page: content/lineup/djs.md" }}{{ end -}}
+{{- if not $vjs }}{{ errorf "Missing page: content/lineup/vjs.md" }}{{ end -}}
+{{- if not $involved }}{{ errorf "Missing page: content/get-involved/_index.md" }}{{ end -}}
+{{- if not $directions }}{{ errorf "Missing page: content/guide/directions.md (create with driving, flying, bus, train, etc. content)" }}{{ end -}}
+
+{{/* --- Validate required frontmatter on content/_index.md ---
+
+  Expected frontmatter:
+
+  event_number: "XIV"
+  theme_name: "Presence and the Eternal Now"
+  year: 2026
+  dates: "Thu, May 21, NOON to Mon, May 25, NOON 2026"
+  location: "Secret Location Upstate"
+  location_detail: "Location released to ticket holders week of the event"
+  overview: |
+    Join Disorient for year 14 of our annual journey of deep chilling...
+  theme_description: |
+    An orderly return to chaos...
+  hero_images:
+    - file: "Ccxiv-hero.png"
+      width: 550
+  general_info:
+    - "There is no vending at Country Club..."
+    - "You may bring your pets..."
+  areas_of_interest:
+    - url: "https://example.com"
+      text: "Description"
+  mood_images:
+    - "Image1.png"
+    - "Image2.jpg"
+  tshirt_image: "CCXivTshirt.png"
+  escutcheon_images:
+    - file: "CCXiv.Escutcheon.png"
+      width: 250
+
+*/}}
+{{- if not .Params.event_number }}{{ errorf "_index.md: missing 'event_number' (e.g. 'XIV')" }}{{ end -}}
+{{- if not .Params.theme_name }}{{ errorf "_index.md: missing 'theme_name'" }}{{ end -}}
+{{- if not .Params.year }}{{ errorf "_index.md: missing 'year'" }}{{ end -}}
+{{- if not .Params.dates }}{{ errorf "_index.md: missing 'dates' (e.g. 'Thu, May 21, NOON to Mon, May 25, NOON 2026')" }}{{ end -}}
+{{- if not .Params.location }}{{ errorf "_index.md: missing 'location'" }}{{ end -}}
+{{- if not .Params.location_detail }}{{ errorf "_index.md: missing 'location_detail'" }}{{ end -}}
+{{- if not .Params.overview }}{{ errorf "_index.md: missing 'overview'" }}{{ end -}}
+{{- if not .Params.theme_description }}{{ errorf "_index.md: missing 'theme_description'" }}{{ end -}}
+{{- if not .Params.hero_images }}{{ errorf "_index.md: missing 'hero_images' (array of {file, width})" }}{{ end -}}
+{{- if not .Params.general_info }}{{ errorf "_index.md: missing 'general_info' (array of strings)" }}{{ end -}}
+{{- if not .Params.mood_images }}{{ errorf "_index.md: missing 'mood_images' (array of image filenames)" }}{{ end -}}
+{{- if not .Params.tshirt_image }}{{ errorf "_index.md: missing 'tshirt_image'" }}{{ end -}}
+{{- if not .Params.escutcheon_images }}{{ errorf "_index.md: missing 'escutcheon_images' (array of {file, width})" }}{{ end -}}
+
+{{/* --- Validate required links in data/links.yaml ---
+
+  Expected fields:
+
+  ticket: "https://events.humanitix.com/..."
+  volunteer: "https://tinyurl.com/..."
+  art_submission: "https://tinyurl.com/..."
+  themecamp: "https://tinyurl.com/..."
+  guide_submission: "https://tinyurl.com/..."
+  art_car: "https://tinyurl.com/..."
+  wiki: "http://wiki.disorient.info/..."
+  survival_guide: "https://disorientcountry.club"
+
+*/}}
+{{- if not .Site.Data.links }}{{ errorf "Missing data file: data/links.yaml" }}{{ end -}}
+{{- with .Site.Data.links -}}
+{{- if not .ticket }}{{ errorf "data/links.yaml: missing 'ticket'" }}{{ end -}}
+{{- if not .volunteer }}{{ errorf "data/links.yaml: missing 'volunteer'" }}{{ end -}}
+{{- if not .art_submission }}{{ errorf "data/links.yaml: missing 'art_submission'" }}{{ end -}}
+{{- if not .themecamp }}{{ errorf "data/links.yaml: missing 'themecamp'" }}{{ end -}}
+{{- if not .guide_submission }}{{ errorf "data/links.yaml: missing 'guide_submission'" }}{{ end -}}
+{{- if not .art_car }}{{ errorf "data/links.yaml: missing 'art_car'" }}{{ end -}}
+{{- if not .wiki }}{{ errorf "data/links.yaml: missing 'wiki'" }}{{ end -}}
+{{- if not .survival_guide }}{{ errorf "data/links.yaml: missing 'survival_guide'" }}{{ end -}}
+{{- end -}}
+
+{{/* --- Validate required frontmatter on lineup pages ---
+
+  Expected frontmatter on content/lineup/djs.md and vjs.md:
+
+  artists:
+    - name: "DJ NAME"
+    - name: "ANOTHER DJ"
+  lineup_image: "CCXiv_DJ_Lineup.jpg"
+  lineup_image_width: 350
+
+*/}}
+{{/* --- Validate camps exist --- */}}
+{{- $camps := where .Site.RegularPages "Section" "camps" -}}
+{{- if not $camps }}{{ errorf "No camp pages found in content/camps/ (create .md files with title, tagline, hours, events)" }}{{ end -}}
+
+{{/* --- Art adventures (optional) ---
+
+  Expected files in content/art/:
+
+  ---
+  title: "Art Piece Name"
+  creators: "Artist Name"
+  wiki_link: "Optional_Wiki_Page_Name"
+  ---
+
+  Description of the art piece.
+
+*/}}
+{{- $artPages := where .Site.RegularPages "Section" "art" -}}
+
+{{/* --- Temple page (optional) ---
+
+  If content/temple/_index.md exists, it will be rendered.
+  Expected frontmatter:
+
+  ---
+  title: "The Thirteenth"
+  creators: "Geodesic Temple"
+  wiki_link: "The_Thirteenth"
+  temple_images:
+    - file: "20250503.TheThirteenth.2.jpg"
+      wiki_link: "The_Thirteenth"
+      width: 370
+  ---
+
+*/}}
+{{- with $temple -}}
+{{- if not .Params.creators }}{{ errorf "temple/_index.md: missing 'creators'" }}{{ end -}}
+{{- if not .Params.temple_images }}{{ errorf "temple/_index.md: missing 'temple_images' (array of {file, wiki_link, width})" }}{{ end -}}
+{{- end -}}
+
+{{/* ================================================================
+     BEGIN MEDIAWIKI OUTPUT
+     ================================================================ */}}
+a [[Country_Club|Disorient COUNTRY CLUB]] event<BR>
+{{ range .Params.hero_images -}}
+[[Image:{{ .file }}|{{ .width }}px]] {{ end }}
+==OVERVIEW==
+{{ .Params.overview }}
+<P>
+
+Disorient presents: COUNTRY CLUB {{ .Params.event_number }} - {{ .Params.theme_name }}<BR>
+{{ .Params.dates }} <BR>
+{{ .Params.location }}<BR>
+{{ .Params.location_detail }}<BR>
+
+=={{ .Params.year }} THEME==
+Disorient Country Club {{ .Params.year }} Theme: {{ .Params.theme_name }}<BR>
+{{ .Params.theme_description }}
+<BR>
+
+==OUR ART + YOUR ART==
+{{ with $art }}{{ template "wiki-content" . }}{{ end }}<BR>
+
+==TICKETS==
+
+{{ with .Site.Data.links -}}
+TICKETS: {{ .ticket }}<BR>
+
+VOLUNTEER: {{ .volunteer }}<BR>
+SUBMIT ART: {{ .art_submission }}<BR>
+THEMECAMPS PLACEMENT REQUEST: {{ .themecamp }}<BR>
+SUBMIT EVENT OR WORKSHOP TO SURVIVAL GUIDE: {{ .guide_submission }}<BR>
+ART CAR SUBMISSION: {{ .art_car }}<BR>
+
+SURVIVAL GUIDE: {{ .survival_guide }}<BR>
+DISORIENT WIKI: {{ .wiki }}<BR>
+{{ with .facebook }}FACEBOOK: {{ . }}{{ end }}
+{{- end }}
+
+{{ with $djs }}{{ if .Params.artists }}
+==DJ LINEUP==
+{{ with .Params.lineup_image }}[[Image:{{ . }}|right|350px]]{{ end }}
+{{ range .Params.artists -}}
+{{ .name }}<br />
+{{ end -}}
+{{ end }}{{ end }}
+{{ with $vjs }}{{ if .Params.artists }}
+==VJ LINEUP==
+{{ with .Params.lineup_image }}[[Image:{{ . }}|right|210px]]{{ end }}
+{{ range .Params.artists -}}
+{{ .name }}<br />
+{{ end -}}
+{{ end }}{{ end }}
+==THEME CAMPS==
+{{ range $camps }}{{ $pageTitle := .Title }}
+==={{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }}===
+{{ template "wiki-content" . }}
+{{ end }}
+{{ if $artPages }}
+==ART ADVENTURES==
+{{ range $artPages }}{{ $pageTitle := .Title }}
+==={{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }}===
+{{ with .Params.creators }}{{ . }}<br />{{ end }}
+{{ template "wiki-content" . }}
+{{ end }}
+{{ end }}
+{{ with $temple -}}
+==TEMPLE==
+{{ $pageTitle := .Title }}
+{{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }} by <I>{{ .Params.creators }}</I><BR>
+{{ range .Params.temple_images -}}
+[[Image:{{ .file }}|link={{ .wiki_link }}|{{ .width }}px]] {{ end }}<BR>
+{{ template "wiki-content" . }}
+{{- end }}
+
+{{ with $directions }}{{ template "wiki-content" . }}{{ end }}
+
+==GENERAL INFO==
+{{ range .Params.general_info -}}
+* {{ . }}<BR>
+{{ end }}
+
+{{ if .Params.areas_of_interest }}
+==AREAS OF INTEREST==
+{{ range .Params.areas_of_interest -}}
+[{{ .url }} {{ .text }}]
+<BR>
+{{ end }}
+{{ end }}
+
+==MOODS==
+<gallery heights=200 mode="packed-hover">
+{{ range .Params.mood_images -}}
+Image:{{ . }}
+{{ end -}}
+</gallery>
+
+==T-SHIRT==
+[[Image:{{ .Params.tshirt_image }}|240px]]
+
+==ESCUTCHEON==
+{{ range .Params.escutcheon_images -}}
+[[Image:{{ .file }}|{{ .width }}px]] {{ end }}<BR>
+
+
+
+a [[Country_Club|Disorient COUNTRY CLUB]] event<BR>

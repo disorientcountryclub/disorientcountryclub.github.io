@@ -1,6 +1,6 @@
 ---
 title: "Upon Arrival"
-weight: 4
+weight: 5
 ---
 
 Welcome to Disorient Country Club. Map is unmarked beyond the basics as we are journeying into the unknown inviting all to explore pathways and regions to find what this year has hidden to discover.
