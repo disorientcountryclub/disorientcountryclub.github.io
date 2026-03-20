@@ -33,9 +33,6 @@
   dates: "Thu, May 21, NOON to Mon, May 25, NOON 2026"
   location: "Secret Location Upstate"
   location_detail: "Location released to ticket holders week of the event"
-  ticket_url: "https://events.humanitix.com/..."
-  wiki_url: "http://wiki.disorient.info/index.php?title=Country_Club"
-  survival_guide_url: "https://disorientcountry.club"
   overview: |
     Join Disorient for year 14 of our annual journey of deep chilling...
   theme_description: |
@@ -64,9 +61,6 @@
 {{- if not .Params.dates }}{{ errorf "_index.md: missing 'dates' (e.g. 'Thu, May 21, NOON to Mon, May 25, NOON 2026')" }}{{ end -}}
 {{- if not .Params.location }}{{ errorf "_index.md: missing 'location'" }}{{ end -}}
 {{- if not .Params.location_detail }}{{ errorf "_index.md: missing 'location_detail'" }}{{ end -}}
-{{- if not .Params.ticket_url }}{{ errorf "_index.md: missing 'ticket_url'" }}{{ end -}}
-{{- if not .Params.wiki_url }}{{ errorf "_index.md: missing 'wiki_url'" }}{{ end -}}
-{{- if not .Params.survival_guide_url }}{{ errorf "_index.md: missing 'survival_guide_url'" }}{{ end -}}
 {{- if not .Params.overview }}{{ errorf "_index.md: missing 'overview'" }}{{ end -}}
 {{- if not .Params.theme_description }}{{ errorf "_index.md: missing 'theme_description'" }}{{ end -}}
 {{- if not .Params.hero_images }}{{ errorf "_index.md: missing 'hero_images' (array of {file, width})" }}{{ end -}}
@@ -76,24 +70,30 @@
 {{- if not .Params.escutcheon_images }}{{ errorf "_index.md: missing 'escutcheon_images' (array of {file, width})" }}{{ end -}}
 {{- if not .Params.areas_of_interest }}{{ errorf "_index.md: missing 'areas_of_interest' (array of {url, text})" }}{{ end -}}
 
-{{/* --- Validate required frontmatter on content/get-involved/_index.md ---
+{{/* --- Validate required links in data/links.yaml ---
 
-  Expected additions to existing frontmatter:
+  Expected fields:
 
-  volunteer_url: "https://tinyurl.com/..."
-  art_submission_url: "https://tinyurl.com/..."
-  themecamp_url: "https://tinyurl.com/..."
-  guide_submission_url: "https://tinyurl.com/..."
-  art_car_url: "https://tinyurl.com/..."
-  facebook_url: "https://tinyurl.com/..."
+  ticket: "https://events.humanitix.com/..."
+  volunteer: "https://tinyurl.com/..."
+  art_submission: "https://tinyurl.com/..."
+  themecamp: "https://tinyurl.com/..."
+  guide_submission: "https://tinyurl.com/..."
+  art_car: "https://tinyurl.com/..."
+  wiki: "http://wiki.disorient.info/..."
+  survival_guide: "https://disorientcountry.club"
 
 */}}
-{{- with $involved -}}
-{{- if not .Params.volunteer_url }}{{ errorf "get-involved/_index.md: missing 'volunteer_url'" }}{{ end -}}
-{{- if not .Params.art_submission_url }}{{ errorf "get-involved/_index.md: missing 'art_submission_url'" }}{{ end -}}
-{{- if not .Params.themecamp_url }}{{ errorf "get-involved/_index.md: missing 'themecamp_url'" }}{{ end -}}
-{{- if not .Params.guide_submission_url }}{{ errorf "get-involved/_index.md: missing 'guide_submission_url'" }}{{ end -}}
-{{- if not .Params.art_car_url }}{{ errorf "get-involved/_index.md: missing 'art_car_url'" }}{{ end -}}
+{{- if not .Site.Data.links }}{{ errorf "Missing data file: data/links.yaml" }}{{ end -}}
+{{- with .Site.Data.links -}}
+{{- if not .ticket }}{{ errorf "data/links.yaml: missing 'ticket'" }}{{ end -}}
+{{- if not .volunteer }}{{ errorf "data/links.yaml: missing 'volunteer'" }}{{ end -}}
+{{- if not .art_submission }}{{ errorf "data/links.yaml: missing 'art_submission'" }}{{ end -}}
+{{- if not .themecamp }}{{ errorf "data/links.yaml: missing 'themecamp'" }}{{ end -}}
+{{- if not .guide_submission }}{{ errorf "data/links.yaml: missing 'guide_submission'" }}{{ end -}}
+{{- if not .art_car }}{{ errorf "data/links.yaml: missing 'art_car'" }}{{ end -}}
+{{- if not .wiki }}{{ errorf "data/links.yaml: missing 'wiki'" }}{{ end -}}
+{{- if not .survival_guide }}{{ errorf "data/links.yaml: missing 'survival_guide'" }}{{ end -}}
 {{- end -}}
 
 {{/* --- Validate required frontmatter on lineup pages ---
@@ -181,17 +181,19 @@ Disorient Country Club {{ .Params.year }} Theme: {{ .Params.theme_name }}<BR>
 
 ==TICKETS==
 
-TICKETS: {{ .Params.ticket_url }}<BR>
-{{ with $involved }}
-VOLUNTEER: {{ .Params.volunteer_url }}<BR>
-SUBMIT ART: {{ .Params.art_submission_url }}<BR>
-THEMECAMPS PLACEMENT REQUEST: {{ .Params.themecamp_url }}<BR>
-SUBMIT EVENT OR WORKSHOP TO SURVIVAL GUIDE: {{ .Params.guide_submission_url }}<BR>
-ART CAR SUBMISSION: {{ .Params.art_car_url }}<BR>
-{{ end }}
-SURVIVAL GUIDE: {{ .Params.survival_guide_url }}<BR>
-DISORIENT WIKI: {{ .Params.wiki_url }}<BR>
-{{ with .Params.facebook_url }}FACEBOOK: {{ . }}{{ end }}
+{{ with .Site.Data.links -}}
+TICKETS: {{ .ticket }}<BR>
+
+VOLUNTEER: {{ .volunteer }}<BR>
+SUBMIT ART: {{ .art_submission }}<BR>
+THEMECAMPS PLACEMENT REQUEST: {{ .themecamp }}<BR>
+SUBMIT EVENT OR WORKSHOP TO SURVIVAL GUIDE: {{ .guide_submission }}<BR>
+ART CAR SUBMISSION: {{ .art_car }}<BR>
+
+SURVIVAL GUIDE: {{ .survival_guide }}<BR>
+DISORIENT WIKI: {{ .wiki }}<BR>
+{{ with .facebook }}FACEBOOK: {{ . }}{{ end }}
+{{- end }}
 
 ==DJ LINEUP==
 {{ with $djs -}}
