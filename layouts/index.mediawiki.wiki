@@ -6,6 +6,11 @@
   See each section's comments for the expected frontmatter shape.
 */}}
 
+{{/* --- Helper: render page body as HTML, stripping Hugo shortcodes --- */}}
+{{- define "wiki-content" -}}
+  {{- .RawContent | replaceRE `(?s)\{\{<[^>]*>\}\}` "" | replaceRE `(?s)\{\{%[^%]*%\}\}` "" | markdownify -}}
+{{- end -}}
+
 {{/* --- Page lookups --- */}}
 {{- $home := . -}}
 {{- $art := .Site.GetPage "/art" -}}
@@ -167,7 +172,7 @@ Disorient Country Club {{ .Params.year }} Theme: {{ .Params.theme_name }}<BR>
 <BR>
 
 ==OUR ART + YOUR ART==
-{{ with $art }}{{ .Content }}{{ end }}<BR>
+{{ with $art }}{{ template "wiki-content" . }}{{ end }}<BR>
 
 ==TICKETS==
 
@@ -202,14 +207,14 @@ DISORIENT WIKI: {{ .wiki }}<BR>
 ==THEME CAMPS==
 {{ range $camps }}{{ $pageTitle := .Title }}
 ==={{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }}===
-{{ .Content }}
+{{ template "wiki-content" . }}
 {{ end }}
 {{ if $artPages }}
 ==ART ADVENTURES==
 {{ range $artPages }}{{ $pageTitle := .Title }}
 ==={{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }}===
 {{ with .Params.creators }}{{ . }}<br />{{ end }}
-{{ .Content }}
+{{ template "wiki-content" . }}
 {{ end }}
 {{ end }}
 {{ with $temple -}}
@@ -218,10 +223,10 @@ DISORIENT WIKI: {{ .wiki }}<BR>
 {{ with .Params.wiki_link }}[[{{ . }}|{{ $pageTitle }}]]{{ else }}{{ $pageTitle }}{{ end }} by <I>{{ .Params.creators }}</I><BR>
 {{ range .Params.temple_images -}}
 [[Image:{{ .file }}|link={{ .wiki_link }}|{{ .width }}px]] {{ end }}<BR>
-{{ .Content }}
+{{ template "wiki-content" . }}
 {{- end }}
 
-{{ with $directions }}{{ .Content }}{{ end }}
+{{ with $directions }}{{ template "wiki-content" . }}{{ end }}
 
 ==GENERAL INFO==
 {{ range .Params.general_info -}}
