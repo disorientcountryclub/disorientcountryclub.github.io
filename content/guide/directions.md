@@ -3,8 +3,6 @@ title: "Directions"
 weight: 2
 ---
 
-## How Do I Get There?
-
 Our event takes place near Shandaken, NY, 2 ½ hours north of NYC. We will release the exact location the week of the event.
 
 **Transportation Options:**

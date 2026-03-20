@@ -221,7 +221,6 @@ DISORIENT WIKI: {{ .wiki }}<BR>
 {{ .Content }}
 {{- end }}
 
-==HOW DO I GET THERE?==
 {{ with $directions }}{{ .Content }}{{ end }}
 
 ==GENERAL INFO==
