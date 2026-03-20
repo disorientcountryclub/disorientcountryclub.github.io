@@ -1,5 +1,5 @@
 ---
-title: "Preparing for Departure"
+title: "Directions"
 weight: 2
 ---
 
