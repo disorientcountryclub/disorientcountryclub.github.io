@@ -595,6 +595,7 @@ main {
 
 .hero .content a:hover,
 .cta-button:hover {
+  color: #ffffff;
   transform: translateY(-3px);
   box-shadow: 0 5px 40px var(--pornj-pink);
   border: 2px solid var(--neon-purple);
@@ -1503,6 +1504,7 @@ section h2 {
 }
 
 .role-modal-desc a:hover {
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 3px 25px var(--pornj-pink);
   border: 2px solid var(--neon-purple);

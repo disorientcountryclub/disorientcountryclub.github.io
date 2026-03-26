@@ -51,7 +51,7 @@ escutcheon_images:
 
 **SECRET LOCATION UPSTATE NEW YORK**
 
-[Get Tickets]({{< link "ticket" >}})
+{{< cta text="Get Tickets" link="ticket" >}}
 
 &nbsp;
 
