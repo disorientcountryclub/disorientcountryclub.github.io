@@ -9,7 +9,7 @@ location_detail: "Location released to ticket holders week of the event"
 ticket_url: "https://events.humanitix.com/disorient-presents-country-club-xiii-materials-of-intrigue"
 wiki_url: "http://wiki.disorient.info/index.php?title=Country_Club"
 survival_guide_url: "https://countryclub.disorient.info"
-facebook_url: "https://tinyurl.com/yk556t4e"
+facebook: "https://tinyurl.com/yk556t4e"
 overview: |
   Join Disorient for year 13 of our annual journey of deep chilling, off-the-grid futurist relaxation. Country Club is a
   lake and lush green woodland oasis where blissful self-reliance meets massive multiplayer techno and technology

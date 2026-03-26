@@ -84,7 +84,7 @@
 
   Expected fields:
 
-  ticket: "https://events.humanitix.com/..."
+  tickets: "https://events.humanitix.com/..."
   volunteer: "https://tinyurl.com/..."
   art_submission: "https://tinyurl.com/..."
   themecamp: "https://tinyurl.com/..."
@@ -96,7 +96,7 @@
 */}}
 {{- if not .Site.Data.links }}{{ errorf "Missing data file: data/links.yaml" }}{{ end -}}
 {{- with .Site.Data.links -}}
-{{- if not .ticket }}{{ errorf "data/links.yaml: missing 'ticket'" }}{{ end -}}
+{{- if not .tickets }}{{ errorf "data/links.yaml: missing 'tickets'" }}{{ end -}}
 {{- if not .volunteer }}{{ errorf "data/links.yaml: missing 'volunteer'" }}{{ end -}}
 {{- if not .art_submission }}{{ errorf "data/links.yaml: missing 'art_submission'" }}{{ end -}}
 {{- if not .themecamp }}{{ errorf "data/links.yaml: missing 'themecamp'" }}{{ end -}}
@@ -183,7 +183,7 @@ Disorient Country Club {{ .Params.year }} Theme: {{ .Params.theme_name }}<BR>
 ==TICKETS==
 
 {{ with .Site.Data.links -}}
-TICKETS: {{ .ticket }}<BR>
+TICKETS: {{ .tickets }}<BR>
 
 VOLUNTEER: {{ .volunteer }}<BR>
 SUBMIT ART: {{ .art_submission }}<BR>

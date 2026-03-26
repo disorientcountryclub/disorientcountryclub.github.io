@@ -1,0 +1,12 @@
+{{- $url := index .Site.Data.links .Params.link_key -}}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="refresh" content="0; url={{ $url }}" />
+  <link rel="canonical" href="{{ $url }}" />
+  <title>Redirecting...</title>
+</head>
+<body>
+  Redirecting to <a href="{{ $url }}">{{ $url }}</a>...
+</body>
+</html>
