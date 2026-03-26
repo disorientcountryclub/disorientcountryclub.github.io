@@ -1,7 +1,8 @@
 {{ $name := .Get "name" }}
 {{ $icon := .Get "icon" }}
 {{ $type := .Get "type" | default "lead" }}
-<div class="role-card" data-role-type="{{ $type }}" onclick="openRoleModal(this)">
+{{ $filled := .Get "filled" | default "false" }}
+<div class="role-card{{ if eq $filled "true" }} role-filled{{ end }}" data-role-type="{{ $type }}" {{ if eq $filled "true" }}data-role-filled="true"{{ end }} onclick="openRoleModal(this)">
   <div class="role-icon">
     <svg viewBox="0 0 48 48" fill="none" stroke="url(#role-icon-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       {{ if eq $icon "hammer" }}
@@ -104,5 +105,5 @@
     </svg>
   </div>
   <h4 class="role-name">{{ $name }}</h4>
-  <div class="role-description">{{ .Inner }}</div>
+  <div class="role-description">{{ .Inner | markdownify }}</div>
 </div>

@@ -576,7 +576,8 @@ main {
   font-weight: 700;
 }
 
-.hero .content a {
+.hero .content a,
+.cta-button {
   display: inline-block;
   margin-top: 20px;
   padding: 15px 40px;
@@ -592,7 +593,8 @@ main {
   border: 2px solid transparent;
 }
 
-.hero .content a:hover {
+.hero .content a:hover,
+.cta-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 40px var(--pornj-pink);
   border: 2px solid var(--neon-purple);
@@ -1323,15 +1325,43 @@ section h2 {
   flex: 0 1 150px;
 }
 
+.role-card.role-filled {
+  opacity: 0.35;
+  border-color: #555;
+  cursor: default;
+  pointer-events: none;
+}
+
+.role-card.role-filled .role-icon svg {
+  stroke: #666;
+}
+
+.role-card.role-filled .role-name {
+  color: #888;
+}
+
+.role-card.role-filled::after {
+  content: "FILLED";
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: #888;
+  margin-top: 6px;
+}
+
 .role-icon {
   width: 56px;
   height: 56px;
   margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .role-icon svg {
-  width: 100%;
-  height: 100%;
+  width: 48px;
+  height: 48px;
 }
 
 .role-name {
@@ -1412,6 +1442,48 @@ section h2 {
   margin-bottom: 0;
 }
 
+.role-modal-desc strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--pornj-orange), var(--pornj-pink));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.role-modal-desc a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 24px;
+  background: radial-gradient(circle, var(--pornj-pink) 0%, var(--pornj-orange) 100%);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 50px;
+  box-shadow: 0 0 15px var(--pornj-pink);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.role-modal-desc a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 25px var(--pornj-pink);
+  border: 2px solid var(--neon-purple);
+  text-shadow: none;
+}
+
+.role-modal-desc p:first-child strong {
+  margin-top: 0;
+}
+
 @media (max-width: 640px) {
   .role-card {
     flex: 0 1 140px;
@@ -1425,6 +1497,11 @@ section h2 {
   .role-icon {
     width: 44px;
     height: 44px;
+  }
+
+  .role-icon svg {
+    width: 38px;
+    height: 38px;
   }
 
   .role-name {

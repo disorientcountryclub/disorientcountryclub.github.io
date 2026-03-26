@@ -1,0 +1,7 @@
+{{ $text := .Get "text" }}
+{{ $link := .Get "link" }}
+{{ $url := .Get "url" }}
+{{ if $link }}
+  {{ $url = index .Site.Data.links $link }}
+{{ end }}
+<a class="cta-button" href="{{ $url }}">{{ $text }}</a>
