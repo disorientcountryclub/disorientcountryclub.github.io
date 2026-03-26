@@ -33,7 +33,7 @@ Already registered as a volunteer? [sign up for volunteer shifts]({{< link "volu
 
 ---
 
-## Volunteering
+### Volunteering
 
 Our community considers volunteering to be a gift to the community. It also opens the door to new friendships that carry on throughout the event and into the default world, and gives us a chance to feel a sense of pride when we look around and say "I helped to make that possible!"
 

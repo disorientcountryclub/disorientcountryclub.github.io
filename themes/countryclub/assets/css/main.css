@@ -792,6 +792,35 @@ section h2 {
   color: #c0c0c0;
 }
 
+.list-intro h3 {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--pornj-orange), var(--pornj-pink));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.list-intro h2 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: transparent;
+  background: linear-gradient(135deg, var(--pornj-pink) 0%, var(--pornj-orange) 100%);
+  text-transform: uppercase;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
 .list-intro li {
   list-style: none;
 }
@@ -1303,7 +1332,7 @@ section h2 {
 }
 
 .role-card {
-  flex: 0 1 180px;
+  flex: 0 0 150px;
   background: rgba(10, 0, 21, 0.6);
   backdrop-filter: blur(10px);
   border: 1px solid var(--pornj-orange-1);
@@ -1322,7 +1351,7 @@ section h2 {
 }
 
 .role-card[data-role-type="volunteer"] {
-  flex: 0 1 150px;
+  flex: 0 0 150px;
 }
 
 .role-card.role-filled {
@@ -1486,12 +1515,12 @@ section h2 {
 
 @media (max-width: 640px) {
   .role-card {
-    flex: 0 1 140px;
+    flex: 0 0 120px;
     padding: 20px 10px;
   }
 
   .role-card[data-role-type="volunteer"] {
-    flex: 0 1 120px;
+    flex: 0 0 120px;
   }
 
   .role-icon {
