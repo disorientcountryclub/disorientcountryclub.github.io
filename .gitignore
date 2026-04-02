@@ -3,3 +3,4 @@ tmp/
 *.lock
 node_modules/
 public2025/
+resources/_gen/

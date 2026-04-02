@@ -1,0 +1,11 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $width := .Get "width" }}
+{{ $img := resources.Get $src }}
+{{ if $img }}
+{{ $display := $img }}
+{{ if $width }}
+{{ $display = $img.Resize (printf "%sx" $width) }}
+{{ end }}
+<img src="{{ $display.RelPermalink }}" data-full="{{ $img.RelPermalink }}" alt="{{ $alt }}" loading="lazy" class="content-image">
+{{ end }}
