@@ -80,6 +80,38 @@
 
   <div class="list-items">
     
+    <a href="/announcements/2026-04-02-t-shirt/">
+      <article class="list-item">
+        <h2>T-Shirt Design</h2>
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+          <time>April 2, 2026</time>
+        
+
+        
+          <div class="tags">
+            
+              <span class="tag">merchandise</span>
+            
+          </div>
+        
+      </article>
+    </a>
+    
     <a href="/announcements/2026-03-25-gate-hours/">
       <article class="list-item">
         <h2>Important: Gate Schedule Update</h2>
@@ -204,7 +236,7 @@
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('content-image')) {
         var modal = document.getElementById('image-modal');
-        document.getElementById('modal-img').src = e.target.src;
+        document.getElementById('modal-img').src = e.target.dataset.full || e.target.src;
         modal.classList.add('active');
       }
     });

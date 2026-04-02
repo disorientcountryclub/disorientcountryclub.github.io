@@ -222,7 +222,7 @@
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('content-image')) {
         var modal = document.getElementById('image-modal');
-        document.getElementById('modal-img').src = e.target.src;
+        document.getElementById('modal-img').src = e.target.dataset.full || e.target.src;
         modal.classList.add('active');
       }
     });

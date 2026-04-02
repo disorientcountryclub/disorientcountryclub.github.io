@@ -562,7 +562,7 @@
     ctx.fillStyle = textGradient;
 
     var textY = qrCanvasSize + textPadding + textHeight / 2;
-    ctx.fillText('COUNTRY CLUB CCXIV', canvasWidth / 2, textPadding * 1.5);
+    ctx.fillText('COUNTRY CLUB XiV', canvasWidth / 2, textPadding * 1.5);
     ctx.fillText('SECRET', canvasWidth / 2, textY - textPadding * 4.25);
     ctx.fillText('UPSTATE LOCATION', canvasWidth / 2, textY - textPadding * 2.5);
     ctx.fillText('MAY 21-25', canvasWidth / 2, textY);
@@ -621,7 +621,7 @@
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('content-image')) {
         var modal = document.getElementById('image-modal');
-        document.getElementById('modal-img').src = e.target.src;
+        document.getElementById('modal-img').src = e.target.dataset.full || e.target.src;
         modal.classList.add('active');
       }
     });
