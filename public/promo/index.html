@@ -99,496 +99,553 @@
       <h2 id="qr-code-generator">QR Code Generator</h2>
 <p>Generate QR codes linking to Country Club. Right-click or long-press the generated QR code to save it.</p>
 <div class="qr-generator">
-  <div class="qr-controls">
-    <label class="qr-label" for="qr-path">Page</label>
-    <select id="qr-path" class="qr-input">
-      <option value="/">Home</option>
-      <option value="/get-involved/">Get Involved</option>
-      <option value="/lineup/">Lineup</option>
-      <option value="/art/">Art</option>
-      <option value="/camps/">Camps</option>
-      <option value="/guide/">Guide</option>
-      <option value="/announcements/">Announcements</option>
-    </select>
-    <label class="qr-label" for="qr-size">Size</label>
-    <select id="qr-size" class="qr-input">
-      <option value="256">256px</option>
-      <option value="512" selected>512px</option>
-      <option value="1024">1024px</option>
-    </select>
-  </div>
-  <div class="qr-output">
-    <canvas id="qr-canvas"></canvas>
-  </div>
-  <a id="qr-download" class="qr-download-btn" download="country-club-qr.png">Download PNG</a>
+    <div class="qr-controls">
+        <label class="qr-label" for="qr-path">Page</label>
+        <select id="qr-path" class="qr-input">
+            <option value="/">Home</option>
+            <option value="/get-involved/">Get Involved</option>
+            <option value="/lineup/">Lineup</option>
+            <option value="/art/">Art</option>
+            <option value="/camps/">Camps</option>
+            <option value="/guide/">Guide</option>
+            <option value="/announcements/">Announcements</option>
+            <option
+                value="https://events.humanitix.com/disorient-presents-country-club-xiv-presence-and-the-eternal-now"
+            >
+                Tickets
+            </option>
+        </select>
+        <label class="qr-label" for="qr-size">Size</label>
+        <select id="qr-size" class="qr-input">
+            <option value="256">256px</option>
+            <option value="512" selected>512px</option>
+            <option value="1024">1024px</option>
+        </select>
+    </div>
+    <div class="qr-output">
+        <canvas id="qr-canvas"></canvas>
+    </div>
+    <a id="qr-download" class="qr-download-btn" download="country-club-qr.png"
+        >Download PNG</a
+    >
 </div>
 
 <script>
-
-
-(function() {
-  
-  
-
-  
-  
-  var GF256_EXP = new Array(256);
-  var GF256_LOG = new Array(256);
-  (function() {
-    var v = 1;
-    for (var i = 0; i < 255; i++) {
-      GF256_EXP[i] = v;
-      GF256_LOG[v] = i;
-      v <<= 1;
-      if (v >= 256) v ^= 0x11d;
-    }
-    GF256_EXP[255] = GF256_EXP[0];
-  })();
-
-  function gfMul(a, b) {
-    if (a === 0 || b === 0) return 0;
-    return GF256_EXP[(GF256_LOG[a] + GF256_LOG[b]) % 255];
-  }
-
-  function polyMul(a, b) {
-    var result = new Array(a.length + b.length - 1).fill(0);
-    for (var i = 0; i < a.length; i++)
-      for (var j = 0; j < b.length; j++)
-        result[i + j] ^= gfMul(a[i], b[j]);
-    return result;
-  }
-
-  function polyRemainder(dividend, divisor) {
-    var result = dividend.slice();
-    for (var i = 0; i < dividend.length - divisor.length + 1; i++) {
-      if (result[i] === 0) continue;
-      for (var j = 1; j < divisor.length; j++)
-        result[i + j] ^= gfMul(divisor[j], result[i]);
-    }
-    return result.slice(dividend.length - divisor.length + 1);
-  }
-
-  function getGeneratorPoly(degree) {
-    var poly = [1];
-    for (var i = 0; i < degree; i++)
-      poly = polyMul(poly, [1, GF256_EXP[i]]);
-    return poly;
-  }
-
-  
-  var VERSION_CAPACITIES = [0,16,28,44,64,86,108,124,154,182,216,254,290,334,365,412,450,504,560,624,666];
-  var EC_CODEWORDS = [0,10,16,26,18,24,16,18,22,22,26,30,22,22,24,24,28,28,26,26,28];
-  var NUM_BLOCKS = [0,1,1,1,2,2,2,2,2,2,4,4,4,4,4,4,4,4,4,4,4]; 
-
-  function getVersion(dataLen) {
-    for (var v = 1; v <= 20; v++) {
-      if (dataLen <= VERSION_CAPACITIES[v]) return v;
-    }
-    return 20;
-  }
-
-  function encodeData(text) {
     
-    var data = [];
     
-    var bits = [];
+    (function() {
+      
+      
 
-    function pushBits(value, count) {
-      for (var i = count - 1; i >= 0; i--)
-        bits.push((value >> i) & 1);
-    }
-
-    var byteData = [];
-    for (var i = 0; i < text.length; i++) {
-      var c = text.charCodeAt(i);
-      if (c < 128) byteData.push(c);
-      else if (c < 2048) {
-        byteData.push(0xc0 | (c >> 6));
-        byteData.push(0x80 | (c & 0x3f));
-      }
-    }
-
-    var version = getVersion(byteData.length);
-    var charCountBits = version <= 9 ? 8 : 16;
-
-    pushBits(4, 4); 
-    pushBits(byteData.length, charCountBits);
-
-    for (var i = 0; i < byteData.length; i++)
-      pushBits(byteData[i], 8);
-
-    var totalDataCodewords = VERSION_CAPACITIES[version] + (version <= 9 ? 0 : 0);
-    
-    var size = 17 + version * 4;
-    var totalModules = size * size;
-    
-    var totalCodewords = Math.floor(totalModules / 8) - (version <= 1 ? 36 : version <= 6 ? 60 : 100); 
-    
-    var ecCodewords = EC_CODEWORDS[version];
-    var dataCodewords = VERSION_CAPACITIES[version];
-
-    
-    var totalBitsNeeded = dataCodewords * 8;
-    var terminatorLen = Math.min(4, totalBitsNeeded - bits.length);
-    for (var i = 0; i < terminatorLen; i++) bits.push(0);
-
-    
-    while (bits.length % 8 !== 0) bits.push(0);
-
-    
-    var padBytes = [0xEC, 0x11];
-    var padIdx = 0;
-    while (bits.length < totalBitsNeeded) {
-      pushBits(padBytes[padIdx % 2], 8);
-      padIdx++;
-    }
-
-    
-    var codewords = [];
-    for (var i = 0; i < bits.length; i += 8) {
-      var byte = 0;
-      for (var j = 0; j < 8; j++) byte = (byte << 1) | (bits[i + j] || 0);
-      codewords.push(byte);
-    }
-
-    
-    var genPoly = getGeneratorPoly(ecCodewords);
-    var msgPoly = new Array(codewords.length + ecCodewords).fill(0);
-    for (var i = 0; i < codewords.length; i++) msgPoly[i] = codewords[i];
-    var ecData = polyRemainder(msgPoly, genPoly);
-
-    return { version: version, data: codewords.concat(ecData), size: size, ecCodewords: ecCodewords };
-  }
-
-  function createMatrix(version) {
-    var size = 17 + version * 4;
-    var matrix = [];
-    var reserved = [];
-    for (var i = 0; i < size; i++) {
-      matrix[i] = new Array(size).fill(0);
-      reserved[i] = new Array(size).fill(false);
-    }
-
-    function setModule(row, col, value) {
-      if (row >= 0 && row < size && col >= 0 && col < size) {
-        matrix[row][col] = value ? 1 : 0;
-        reserved[row][col] = true;
-      }
-    }
-
-    
-    function drawFinder(row, col) {
-      for (var r = -1; r <= 7; r++) {
-        for (var c = -1; c <= 7; c++) {
-          var val = false;
-          if (r >= 0 && r <= 6 && c >= 0 && c <= 6) {
-            val = (r === 0 || r === 6 || c === 0 || c === 6 ||
-                   (r >= 2 && r <= 4 && c >= 2 && c <= 4));
-          }
-          setModule(row + r, col + c, val);
+      
+      
+      var GF256_EXP = new Array(256);
+      var GF256_LOG = new Array(256);
+      (function() {
+        var v = 1;
+        for (var i = 0; i < 255; i++) {
+          GF256_EXP[i] = v;
+          GF256_LOG[v] = i;
+          v <<= 1;
+          if (v >= 256) v ^= 0x11d;
         }
+        GF256_EXP[255] = GF256_EXP[0];
+      })();
+
+      function gfMul(a, b) {
+        if (a === 0 || b === 0) return 0;
+        return GF256_EXP[(GF256_LOG[a] + GF256_LOG[b]) % 255];
       }
-    }
 
-    drawFinder(0, 0);
-    drawFinder(0, size - 7);
-    drawFinder(size - 7, 0);
+      function polyMul(a, b) {
+        var result = new Array(a.length + b.length - 1).fill(0);
+        for (var i = 0; i < a.length; i++)
+          for (var j = 0; j < b.length; j++)
+            result[i + j] ^= gfMul(a[i], b[j]);
+        return result;
+      }
 
-    
-    for (var i = 8; i < size - 8; i++) {
-      setModule(6, i, i % 2 === 0);
-      setModule(i, 6, i % 2 === 0);
-    }
+      function polyRemainder(dividend, divisor) {
+        var result = dividend.slice();
+        for (var i = 0; i < dividend.length - divisor.length + 1; i++) {
+          if (result[i] === 0) continue;
+          for (var j = 1; j < divisor.length; j++)
+            result[i + j] ^= gfMul(divisor[j], result[i]);
+        }
+        return result.slice(dividend.length - divisor.length + 1);
+      }
 
-    
-    if (version >= 2) {
-      var alignPos = getAlignmentPositions(version);
-      for (var i = 0; i < alignPos.length; i++) {
-        for (var j = 0; j < alignPos.length; j++) {
-          var r = alignPos[i], c = alignPos[j];
-          if (reserved[r][c]) continue;
-          for (var dr = -2; dr <= 2; dr++) {
-            for (var dc = -2; dc <= 2; dc++) {
-              var val = (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0));
-              setModule(r + dr, c + dc, val);
+      function getGeneratorPoly(degree) {
+        var poly = [1];
+        for (var i = 0; i < degree; i++)
+          poly = polyMul(poly, [1, GF256_EXP[i]]);
+        return poly;
+      }
+
+      
+      var BLOCK_INFO = [
+        null,
+        [10, [1, 16]],           
+        [16, [1, 28]],           
+        [26, [1, 44]],           
+        [18, [2, 32]],           
+        [24, [2, 43]],           
+        [16, [4, 27]],           
+        [18, [4, 31]],           
+        [22, [2, 38], [2, 39]],  
+        [22, [3, 36], [2, 37]],  
+        [26, [4, 43], [1, 44]],  
+        [30, [1, 50], [4, 51]],  
+        [22, [6, 36], [2, 37]],  
+        [22, [8, 37], [1, 38]],  
+        [24, [4, 40], [5, 41]]   
+      ];
+      var VERSION_CAPACITIES = [0];
+      for (var vi = 1; vi < BLOCK_INFO.length; vi++) {
+        var cap = 0;
+        for (var gi = 1; gi < BLOCK_INFO[vi].length; gi++)
+          cap += BLOCK_INFO[vi][gi][0] * BLOCK_INFO[vi][gi][1];
+        VERSION_CAPACITIES[vi] = cap;
+      }
+
+      function getVersion(dataLen) {
+        for (var v = 1; v < BLOCK_INFO.length; v++) {
+          if (dataLen <= VERSION_CAPACITIES[v]) return v;
+        }
+        return BLOCK_INFO.length - 1;
+      }
+
+      function encodeData(text) {
+        
+        var bits = [];
+
+        function pushBits(value, count) {
+          for (var i = count - 1; i >= 0; i--)
+            bits.push((value >> i) & 1);
+        }
+
+        var byteData = [];
+        for (var i = 0; i < text.length; i++) {
+          var c = text.charCodeAt(i);
+          if (c < 128) byteData.push(c);
+          else if (c < 2048) {
+            byteData.push(0xc0 | (c >> 6));
+            byteData.push(0x80 | (c & 0x3f));
+          }
+        }
+
+        var version = getVersion(byteData.length);
+        var charCountBits = version <= 9 ? 8 : 16;
+
+        pushBits(4, 4); 
+        pushBits(byteData.length, charCountBits);
+
+        for (var i = 0; i < byteData.length; i++)
+          pushBits(byteData[i], 8);
+
+        var dataCodewords = VERSION_CAPACITIES[version];
+
+        
+        var totalBitsNeeded = dataCodewords * 8;
+        var terminatorLen = Math.min(4, totalBitsNeeded - bits.length);
+        for (var i = 0; i < terminatorLen; i++) bits.push(0);
+
+        
+        while (bits.length % 8 !== 0) bits.push(0);
+
+        
+        var padBytes = [0xEC, 0x11];
+        var padIdx = 0;
+        while (bits.length < totalBitsNeeded) {
+          pushBits(padBytes[padIdx % 2], 8);
+          padIdx++;
+        }
+
+        
+        var codewords = [];
+        for (var i = 0; i < bits.length; i += 8) {
+          var b = 0;
+          for (var j = 0; j < 8; j++) b = (b << 1) | (bits[i + j] || 0);
+          codewords.push(b);
+        }
+
+        
+        var blockInfo = BLOCK_INFO[version];
+        var ecPerBlock = blockInfo[0];
+        var blocks = [];
+        var offset = 0;
+        for (var g = 1; g < blockInfo.length; g++) {
+          var count = blockInfo[g][0];
+          var bsize = blockInfo[g][1];
+          for (var bi = 0; bi < count; bi++) {
+            blocks.push(codewords.slice(offset, offset + bsize));
+            offset += bsize;
+          }
+        }
+
+        
+        var genPoly = getGeneratorPoly(ecPerBlock);
+        var ecBlocks = [];
+        for (var i = 0; i < blocks.length; i++) {
+          var msgPoly = new Array(blocks[i].length + ecPerBlock).fill(0);
+          for (var j = 0; j < blocks[i].length; j++) msgPoly[j] = blocks[i][j];
+          ecBlocks.push(polyRemainder(msgPoly, genPoly));
+        }
+
+        
+        var interleaved = [];
+        var maxDataLen = 0;
+        for (var i = 0; i < blocks.length; i++)
+          if (blocks[i].length > maxDataLen) maxDataLen = blocks[i].length;
+        for (var i = 0; i < maxDataLen; i++)
+          for (var j = 0; j < blocks.length; j++)
+            if (i < blocks[j].length) interleaved.push(blocks[j][i]);
+
+        
+        for (var i = 0; i < ecPerBlock; i++)
+          for (var j = 0; j < ecBlocks.length; j++)
+            interleaved.push(ecBlocks[j][i]);
+
+        var size = 17 + version * 4;
+        return { version: version, data: interleaved, size: size, ecCodewords: ecPerBlock };
+      }
+
+      function createMatrix(version) {
+        var size = 17 + version * 4;
+        var matrix = [];
+        var reserved = [];
+        for (var i = 0; i < size; i++) {
+          matrix[i] = new Array(size).fill(0);
+          reserved[i] = new Array(size).fill(false);
+        }
+
+        function setModule(row, col, value) {
+          if (row >= 0 && row < size && col >= 0 && col < size) {
+            matrix[row][col] = value ? 1 : 0;
+            reserved[row][col] = true;
+          }
+        }
+
+        
+        function drawFinder(row, col) {
+          for (var r = -1; r <= 7; r++) {
+            for (var c = -1; c <= 7; c++) {
+              var val = false;
+              if (r >= 0 && r <= 6 && c >= 0 && c <= 6) {
+                val = (r === 0 || r === 6 || c === 0 || c === 6 ||
+                       (r >= 2 && r <= 4 && c >= 2 && c <= 4));
+              }
+              setModule(row + r, col + c, val);
             }
           }
         }
-      }
-    }
 
-    
-    for (var i = 0; i < 8; i++) {
-      if (!reserved[8][i]) { reserved[8][i] = true; }
-      if (!reserved[i][8]) { reserved[i][8] = true; }
-      if (!reserved[8][size - 1 - i]) { reserved[8][size - 1 - i] = true; }
-      if (!reserved[size - 1 - i][8]) { reserved[size - 1 - i][8] = true; }
-    }
-    reserved[8][8] = true;
-    
-    setModule(size - 8, 8, true);
+        drawFinder(0, 0);
+        drawFinder(0, size - 7);
+        drawFinder(size - 7, 0);
 
-    
-    if (version >= 7) {
-      var versionBits = getVersionBits(version);
-      for (var i = 0; i < 18; i++) {
-        var bit = (versionBits >> i) & 1;
-        var r = Math.floor(i / 3);
-        var c = size - 11 + (i % 3);
-        setModule(r, c, bit);
-        setModule(c, r, bit);
-      }
-    }
+        
+        for (var i = 8; i < size - 8; i++) {
+          setModule(6, i, i % 2 === 0);
+          setModule(i, 6, i % 2 === 0);
+        }
 
-    return { matrix: matrix, reserved: reserved, size: size };
-  }
-
-  function getAlignmentPositions(version) {
-    if (version === 1) return [];
-    var positions = [6];
-    var last = 17 + version * 4 - 7;
-    var count = Math.floor(version / 7) + 2;
-    var step = Math.ceil((last - 6) / (count - 1));
-    step = Math.ceil(step / 2) * 2; 
-    for (var pos = last; pos > 6; pos -= step)
-      positions.splice(1, 0, pos);
-    return positions;
-  }
-
-  function getVersionBits(version) {
-    var rem = version;
-    for (var i = 0; i < 12; i++) rem = (rem << 1) ^ ((rem >> 11) * 0x1F25);
-    return (version << 12) | rem;
-  }
-
-  function placeData(matrixInfo, data) {
-    var size = matrixInfo.size;
-    var matrix = matrixInfo.matrix;
-    var reserved = matrixInfo.reserved;
-
-    var bitIndex = 0;
-    var totalBits = data.length * 8;
-
-    
-    var upward = true;
-    for (var col = size - 1; col >= 1; col -= 2) {
-      if (col === 6) col = 5; 
-      for (var i = 0; i < size; i++) {
-        var row = upward ? size - 1 - i : i;
-        for (var dc = 0; dc <= 1; dc++) {
-          var c = col - dc;
-          if (reserved[row][c]) continue;
-          if (bitIndex < totalBits) {
-            var byteIdx = Math.floor(bitIndex / 8);
-            var bitPos = 7 - (bitIndex % 8);
-            matrix[row][c] = (data[byteIdx] >> bitPos) & 1;
-            bitIndex++;
+        
+        if (version >= 2) {
+          var alignPos = getAlignmentPositions(version);
+          for (var i = 0; i < alignPos.length; i++) {
+            for (var j = 0; j < alignPos.length; j++) {
+              var r = alignPos[i], c = alignPos[j];
+              if (reserved[r][c]) continue;
+              for (var dr = -2; dr <= 2; dr++) {
+                for (var dc = -2; dc <= 2; dc++) {
+                  var val = (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0));
+                  setModule(r + dr, c + dc, val);
+                }
+              }
+            }
           }
         }
+
+        
+        for (var i = 0; i < 8; i++) {
+          if (!reserved[8][i]) { reserved[8][i] = true; }
+          if (!reserved[i][8]) { reserved[i][8] = true; }
+          if (!reserved[8][size - 1 - i]) { reserved[8][size - 1 - i] = true; }
+          if (!reserved[size - 1 - i][8]) { reserved[size - 1 - i][8] = true; }
+        }
+        reserved[8][8] = true;
+        
+        setModule(size - 8, 8, true);
+
+        
+        if (version >= 7) {
+          var versionBits = getVersionBits(version);
+          for (var i = 0; i < 18; i++) {
+            var bit = (versionBits >> i) & 1;
+            var r = Math.floor(i / 3);
+            var c = size - 11 + (i % 3);
+            setModule(r, c, bit);
+            setModule(c, r, bit);
+          }
+        }
+
+        return { matrix: matrix, reserved: reserved, size: size };
       }
-      upward = !upward;
-    }
-  }
 
-  function applyMask(matrix, reserved, size, maskNum) {
-    var maskFn;
-    switch(maskNum) {
-      case 0: maskFn = function(r,c) { return (r+c)%2===0; }; break;
-      case 1: maskFn = function(r,c) { return r%2===0; }; break;
-      case 2: maskFn = function(r,c) { return c%3===0; }; break;
-      case 3: maskFn = function(r,c) { return (r+c)%3===0; }; break;
-      case 4: maskFn = function(r,c) { return (Math.floor(r/2)+Math.floor(c/3))%2===0; }; break;
-      case 5: maskFn = function(r,c) { return (r*c)%2+(r*c)%3===0; }; break;
-      case 6: maskFn = function(r,c) { return ((r*c)%2+(r*c)%3)%2===0; }; break;
-      case 7: maskFn = function(r,c) { return ((r+c)%2+(r*c)%3)%2===0; }; break;
-    }
-    for (var r = 0; r < size; r++)
-      for (var c = 0; c < size; c++)
-        if (!reserved[r][c] && maskFn(r,c))
-          matrix[r][c] ^= 1;
-  }
-
-  function applyFormatInfo(matrix, size, maskNum) {
-    
-    var ecLevel = 0; 
-    var formatData = (ecLevel << 3) | maskNum;
-    var rem = formatData;
-    for (var i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >> 9) * 0x537);
-    var formatBits = ((formatData << 10) | rem) ^ 0x5412;
-
-    
-    for (var i = 0; i < 6; i++) matrix[8][i] = (formatBits >> (14-i)) & 1;
-    matrix[8][7] = (formatBits >> 8) & 1;
-    matrix[8][8] = (formatBits >> 7) & 1;
-    matrix[7][8] = (formatBits >> 6) & 1;
-    for (var i = 0; i < 6; i++) matrix[5-i][8] = (formatBits >> (5-i)) & 1;
-
-    for (var i = 0; i < 7; i++) matrix[size-1-i][8] = (formatBits >> (14-i)) & 1;
-    for (var i = 0; i < 8; i++) matrix[8][size-8+i] = (formatBits >> (7-i)) & 1;
-  }
-
-  function calculatePenalty(matrix, size) {
-    var penalty = 0;
-    
-    for (var r = 0; r < size; r++) {
-      var count = 1;
-      for (var c = 1; c < size; c++) {
-        if (matrix[r][c] === matrix[r][c-1]) { count++; }
-        else { if (count >= 5) penalty += count - 2; count = 1; }
+      function getAlignmentPositions(version) {
+        if (version === 1) return [];
+        var positions = [6];
+        var last = 17 + version * 4 - 7;
+        var count = Math.floor(version / 7) + 2;
+        var step = Math.ceil((last - 6) / (count - 1));
+        step = Math.ceil(step / 2) * 2; 
+        for (var pos = last; pos > 6; pos -= step)
+          positions.splice(1, 0, pos);
+        return positions;
       }
-      if (count >= 5) penalty += count - 2;
-    }
-    for (var c = 0; c < size; c++) {
-      var count = 1;
-      for (var r = 1; r < size; r++) {
-        if (matrix[r][c] === matrix[r-1][c]) { count++; }
-        else { if (count >= 5) penalty += count - 2; count = 1; }
+
+      function getVersionBits(version) {
+        var rem = version;
+        for (var i = 0; i < 12; i++) rem = (rem << 1) ^ ((rem >> 11) * 0x1F25);
+        return (version << 12) | rem;
       }
-      if (count >= 5) penalty += count - 2;
-    }
-    
-    for (var r = 0; r < size-1; r++)
-      for (var c = 0; c < size-1; c++)
-        if (matrix[r][c]===matrix[r][c+1] && matrix[r][c]===matrix[r+1][c] && matrix[r][c]===matrix[r+1][c+1])
-          penalty += 3;
-    return penalty;
-  }
 
-  function generateQR(text) {
-    var encoded = encodeData(text);
-    var best = null, bestPenalty = Infinity;
+      function placeData(matrixInfo, data) {
+        var size = matrixInfo.size;
+        var matrix = matrixInfo.matrix;
+        var reserved = matrixInfo.reserved;
 
-    for (var mask = 0; mask < 8; mask++) {
-      var mi = createMatrix(encoded.version);
-      placeData(mi, encoded.data);
-      applyMask(mi.matrix, mi.reserved, mi.size, mask);
-      applyFormatInfo(mi.matrix, mi.size, mask);
-      var p = calculatePenalty(mi.matrix, mi.size);
-      if (p < bestPenalty) { bestPenalty = p; best = mi.matrix; }
-    }
+        var bitIndex = 0;
+        var totalBits = data.length * 8;
 
-    return { matrix: best, size: encoded.size };
-  }
-
-  
-  var logoImg = new Image();
-  logoImg.crossOrigin = 'anonymous';
-  logoImg.src = '\/images\/20260121.CCXiVVexillum.png';
-  var logoLoaded = false;
-  logoImg.onload = function() { logoLoaded = true; update(); };
-
-  
-  var fontReady = false;
-  var disorientFont = new FontFace('Disorient', "url('\/fonts\/Disorient 2017.ttf')");
-  disorientFont.load().then(function(loaded) {
-    document.fonts.add(loaded);
-    fontReady = true;
-    update();
-  }).catch(function() { fontReady = false; });
-
-  function renderQR(canvas, qr, targetSize) {
-    var quiet = 4; 
-    var totalModules = qr.size + quiet * 2;
-
-    
-    var qrCanvasSize = targetSize;
-    var pixelSize = targetSize / totalModules;
-
-    
-    var textHeight = Math.round(qrCanvasSize * 0.12);
-    var textPadding = Math.round(qrCanvasSize * 0.03);
-    var canvasWidth = qrCanvasSize;
-    var canvasHeight = qrCanvasSize + textHeight + textPadding;
-
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-
-    var ctx = canvas.getContext('2d');
-
-    
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-
-    
-    var gradient = ctx.createLinearGradient(0, 0, qrCanvasSize, qrCanvasSize);
-    gradient.addColorStop(0, '#ff8800');
-    gradient.addColorStop(1, '#ff0088');
-    ctx.fillStyle = gradient;
-
-    
-    for (var r = 0; r < qr.size; r++) {
-      for (var c = 0; c < qr.size; c++) {
-        if (qr.matrix[r][c]) {
-          var x = (c + quiet) * pixelSize;
-          var y = (r + quiet) * pixelSize;
-          
-          ctx.fillRect(Math.floor(x), Math.floor(y),
-            Math.ceil(pixelSize), Math.ceil(pixelSize));
+        
+        var upward = true;
+        for (var col = size - 1; col >= 1; col -= 2) {
+          if (col === 6) col = 5; 
+          for (var i = 0; i < size; i++) {
+            var row = upward ? size - 1 - i : i;
+            for (var dc = 0; dc <= 1; dc++) {
+              var c = col - dc;
+              if (reserved[row][c]) continue;
+              if (bitIndex < totalBits) {
+                var byteIdx = Math.floor(bitIndex / 8);
+                var bitPos = 7 - (bitIndex % 8);
+                matrix[row][c] = (data[byteIdx] >> bitPos) & 1;
+                bitIndex++;
+              }
+            }
+          }
+          upward = !upward;
         }
       }
-    }
 
-    
-    if (logoLoaded) {
-      var logoSize = Math.round(qrCanvasSize * 0.15);
-      var logoPadding = Math.round(logoSize * 0.05);
-      var bgSize = logoSize + logoPadding * 2;
+      function applyMask(matrix, reserved, size, maskNum) {
+        var maskFn;
+        switch(maskNum) {
+          case 0: maskFn = function(r,c) { return (r+c)%2===0; }; break;
+          case 1: maskFn = function(r,c) { return r%2===0; }; break;
+          case 2: maskFn = function(r,c) { return c%3===0; }; break;
+          case 3: maskFn = function(r,c) { return (r+c)%3===0; }; break;
+          case 4: maskFn = function(r,c) { return (Math.floor(r/2)+Math.floor(c/3))%2===0; }; break;
+          case 5: maskFn = function(r,c) { return (r*c)%2+(r*c)%3===0; }; break;
+          case 6: maskFn = function(r,c) { return ((r*c)%2+(r*c)%3)%2===0; }; break;
+          case 7: maskFn = function(r,c) { return ((r+c)%2+(r*c)%3)%2===0; }; break;
+        }
+        for (var r = 0; r < size; r++)
+          for (var c = 0; c < size; c++)
+            if (!reserved[r][c] && maskFn(r,c))
+              matrix[r][c] ^= 1;
+      }
+
+      function applyFormatInfo(matrix, size, maskNum) {
+        
+        var ecLevel = 0; 
+        var formatData = (ecLevel << 3) | maskNum;
+        var rem = formatData;
+        for (var i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >> 9) * 0x537);
+        var formatBits = ((formatData << 10) | rem) ^ 0x5412;
+
+        
+        for (var i = 0; i < 6; i++) matrix[8][i] = (formatBits >> (14-i)) & 1;
+        matrix[8][7] = (formatBits >> 8) & 1;
+        matrix[8][8] = (formatBits >> 7) & 1;
+        matrix[7][8] = (formatBits >> 6) & 1;
+        for (var i = 0; i < 6; i++) matrix[5-i][8] = (formatBits >> (5-i)) & 1;
+
+        for (var i = 0; i < 7; i++) matrix[size-1-i][8] = (formatBits >> (14-i)) & 1;
+        for (var i = 0; i < 8; i++) matrix[8][size-8+i] = (formatBits >> (7-i)) & 1;
+      }
+
+      function calculatePenalty(matrix, size) {
+        var penalty = 0;
+        
+        for (var r = 0; r < size; r++) {
+          var count = 1;
+          for (var c = 1; c < size; c++) {
+            if (matrix[r][c] === matrix[r][c-1]) { count++; }
+            else { if (count >= 5) penalty += count - 2; count = 1; }
+          }
+          if (count >= 5) penalty += count - 2;
+        }
+        for (var c = 0; c < size; c++) {
+          var count = 1;
+          for (var r = 1; r < size; r++) {
+            if (matrix[r][c] === matrix[r-1][c]) { count++; }
+            else { if (count >= 5) penalty += count - 2; count = 1; }
+          }
+          if (count >= 5) penalty += count - 2;
+        }
+        
+        for (var r = 0; r < size-1; r++)
+          for (var c = 0; c < size-1; c++)
+            if (matrix[r][c]===matrix[r][c+1] && matrix[r][c]===matrix[r+1][c] && matrix[r][c]===matrix[r+1][c+1])
+              penalty += 3;
+        return penalty;
+      }
+
+      function generateQR(text) {
+        var encoded = encodeData(text);
+        var best = null, bestPenalty = Infinity;
+
+        for (var mask = 0; mask < 8; mask++) {
+          var mi = createMatrix(encoded.version);
+          placeData(mi, encoded.data);
+          applyMask(mi.matrix, mi.reserved, mi.size, mask);
+          applyFormatInfo(mi.matrix, mi.size, mask);
+          var p = calculatePenalty(mi.matrix, mi.size);
+          if (p < bestPenalty) { bestPenalty = p; best = mi.matrix; }
+        }
+
+        return { matrix: best, size: encoded.size };
+      }
 
       
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.arc(qrCanvasSize / 2, qrCanvasSize / 2, bgSize / 2, 0, Math.PI * 2);
-      ctx.fill();
+      var logoImg = new Image();
+      logoImg.crossOrigin = 'anonymous';
+      logoImg.src = '\/images\/20260121.CCXiVVexillum.png';
+      var logoLoaded = false;
+      logoImg.onload = function() { logoLoaded = true; update(); };
 
       
-      var lx = Math.round((qrCanvasSize - logoSize) / 2);
-      var ly = Math.round((qrCanvasSize - logoSize) / 2);
-      ctx.drawImage(logoImg, lx, ly, logoSize, logoSize);
-    }
+      var fontReady = false;
+      var disorientFont = new FontFace('Disorient', "url('\/fonts\/Disorient 2017.ttf')");
+      disorientFont.load().then(function(loaded) {
+        document.fonts.add(loaded);
+        fontReady = true;
+        update();
+      }).catch(function() { fontReady = false; });
 
-    
-    var fontSize = Math.round(textHeight * 0.35);
-    var fontName = fontReady ? 'Disorient' : 'Orbitron, monospace';
-    ctx.font = fontSize + 'px ' + fontName;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+      function renderQR(canvas, qr, targetSize) {
+        var quiet = 4; 
+        var totalModules = qr.size + quiet * 2;
 
-    
-    var textGradient = ctx.createLinearGradient(
-      canvasWidth * 0.2, 0, canvasWidth * 0.8, 0
-    );
-    textGradient.addColorStop(0, '#ff8800');
-    textGradient.addColorStop(1, '#ff0088');
-    ctx.fillStyle = textGradient;
+        
+        var qrCanvasSize = targetSize;
+        var pixelSize = targetSize / totalModules;
 
-    var textY = qrCanvasSize + textPadding + textHeight / 2;
-    ctx.fillText('COUNTRY CLUB XiV', canvasWidth / 2, textPadding * 1.5);
-    ctx.fillText('SECRET', canvasWidth / 2, textY - textPadding * 4.25);
-    ctx.fillText('UPSTATE LOCATION', canvasWidth / 2, textY - textPadding * 2.5);
-    ctx.fillText('MAY 21-25', canvasWidth / 2, textY);
-  }
+        
+        var textHeight = Math.round(qrCanvasSize * 0.12);
+        var textPadding = Math.round(qrCanvasSize * 0.03);
+        var canvasWidth = qrCanvasSize;
+        var canvasHeight = qrCanvasSize + textHeight + textPadding;
 
-  
-  function update() {
-    var path = document.getElementById('qr-path').value;
-    var size = parseInt(document.getElementById('qr-size').value);
-    var url = 'https:\/\/disorientcountry.club\/'.replace(/\/$/, '') + path;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
 
-    var qr = generateQR(url);
-    var canvas = document.getElementById('qr-canvas');
-    renderQR(canvas, qr, size);
+        var ctx = canvas.getContext('2d');
 
-    var link = document.getElementById('qr-download');
-    link.href = canvas.toDataURL('image/png');
-    var pageName = document.getElementById('qr-path').selectedOptions[0].text.toLowerCase().replace(/\s+/g, '-');
-    link.download = 'country-club-qr-' + pageName + '-' + size + 'x' + size + '.png';
-  }
+        
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-  document.getElementById('qr-path').addEventListener('change', update);
-  document.getElementById('qr-size').addEventListener('change', update);
-  
-  update();
-})();
+        
+        var gradient = ctx.createLinearGradient(0, 0, qrCanvasSize, qrCanvasSize);
+        gradient.addColorStop(0, '#ff8800');
+        gradient.addColorStop(1, '#ff0088');
+        ctx.fillStyle = gradient;
+
+        
+        for (var r = 0; r < qr.size; r++) {
+          for (var c = 0; c < qr.size; c++) {
+            if (qr.matrix[r][c]) {
+              var x = (c + quiet) * pixelSize;
+              var y = (r + quiet) * pixelSize;
+              
+              ctx.fillRect(Math.floor(x), Math.floor(y),
+                Math.ceil(pixelSize), Math.ceil(pixelSize));
+            }
+          }
+        }
+
+        
+        if (logoLoaded) {
+          var logoSize = Math.round(qrCanvasSize * 0.15);
+          var logoPadding = Math.round(logoSize * 0.05);
+          var bgSize = logoSize + logoPadding * 2;
+
+          
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(qrCanvasSize / 2, qrCanvasSize / 2, bgSize / 2, 0, Math.PI * 2);
+          ctx.fill();
+
+          
+          var lx = Math.round((qrCanvasSize - logoSize) / 2);
+          var ly = Math.round((qrCanvasSize - logoSize) / 2);
+          ctx.drawImage(logoImg, lx, ly, logoSize, logoSize);
+        }
+
+        
+        var fontSize = Math.round(textHeight * 0.35);
+        var fontName = fontReady ? 'Disorient' : 'Orbitron, monospace';
+        ctx.font = fontSize + 'px ' + fontName;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        
+        var textGradient = ctx.createLinearGradient(
+          canvasWidth * 0.2, 0, canvasWidth * 0.8, 0
+        );
+        textGradient.addColorStop(0, '#ff8800');
+        textGradient.addColorStop(1, '#ff0088');
+        ctx.fillStyle = textGradient;
+
+        var textY = qrCanvasSize + textPadding + textHeight / 2;
+        ctx.fillText('COUNTRY CLUB XiV', canvasWidth / 2, textPadding * 1.5);
+        ctx.fillText('SECRET', canvasWidth / 2, textY - textPadding * 4.25);
+        ctx.fillText('UPSTATE LOCATION', canvasWidth / 2, textY - textPadding * 2.5);
+        ctx.fillText('MAY 21-25', canvasWidth / 2, textY);
+      }
+
+      
+      function update() {
+        var path = document.getElementById('qr-path').value;
+        var size = parseInt(document.getElementById('qr-size').value);
+        var url;
+        if (path.indexOf('https://') > -1) {
+          url = path;
+        } else {
+          url = 'https:\/\/disorientcountry.club\/'.replace(/\/$/, '') + path;
+        }
+        
+        
+
+        var qr = generateQR(url);
+        var canvas = document.getElementById('qr-canvas');
+        renderQR(canvas, qr, size);
+
+        var link = document.getElementById('qr-download');
+        link.href = canvas.toDataURL('image/png');
+        var pageName = document.getElementById('qr-path').selectedOptions[0].text.toLowerCase().replace(/\s+/g, '-');
+        link.download = 'country-club-qr-' + pageName + '-' + size + 'x' + size + '.png';
+      }
+
+      document.getElementById('qr-path').addEventListener('change', update);
+      document.getElementById('qr-size').addEventListener('change', update);
+      
+      update();
+    })();
 </script>
 
 
