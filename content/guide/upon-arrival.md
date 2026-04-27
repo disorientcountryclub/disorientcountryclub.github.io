@@ -9,9 +9,9 @@ Welcome to Disorient Country Club. Map is unmarked beyond the basics as we are j
 
 **GATE IS NOT OPEN 24 HOURS DURING EVENT**
 
-- **Thursday**: Gates are open Noon to 2AM
-- **Friday**: Gates are open 9AM to 2AM
-- **Saturday**: Gates are open 9AM-10PM
+- **Thursday**: Gates open Noon to 12AM
+- **Friday**: Gates open 10AM to 12AM
+- **Saturday**: Gates open 10AM to 6PM
 - **Sunday**: Gate is closed to new arrivals
 
 You will be allowed to go in and out once you have arrived but please, be respectful of the neighbors when you do so. Don't be loud. No late night trips unless absolutely necessary.
