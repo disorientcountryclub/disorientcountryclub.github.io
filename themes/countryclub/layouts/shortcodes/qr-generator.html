@@ -440,70 +440,55 @@
         var quiet = 4; // quiet zone modules
         var totalModules = qr.size + quiet * 2;
 
-        // Fixed canvas width = targetSize; compute pixelSize to fit
         var qrCanvasSize = targetSize;
         var pixelSize = targetSize / totalModules;
 
-        // Extra space below QR for branded text
-        var textHeight = Math.round(qrCanvasSize * 0.12);
-        var textPadding = Math.round(qrCanvasSize * 0.03);
+        // Branded section below the QR: text / vexillum / text
+        var fontSize = Math.round(qrCanvasSize * 0.038);
+        var lineHeight = Math.round(fontSize * 1.35);
+        var vexillumSize = Math.round(qrCanvasSize * 0.14);
+        var gap = Math.round(qrCanvasSize * 0.025);
+        var pad = Math.round(qrCanvasSize * 0.025);
+        var topLines = ['COUNTRY CLUB XiV', 'SECRET'];
+        var bottomLines = ['UPSTATE LOCATION', 'MAY 21-25'];
+        var topTextHeight = lineHeight * topLines.length;
+        var bottomTextHeight = lineHeight * bottomLines.length;
+        var brandHeight = pad + topTextHeight + gap + vexillumSize + gap + bottomTextHeight + pad;
+
         var canvasWidth = qrCanvasSize;
-        var canvasHeight = qrCanvasSize + textHeight + textPadding;
+        var canvasHeight = qrCanvasSize + brandHeight;
 
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;
 
         var ctx = canvas.getContext('2d');
 
-        // White background
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        // Create gradient for dark modules
+        // Gradient for dark QR modules
         var gradient = ctx.createLinearGradient(0, 0, qrCanvasSize, qrCanvasSize);
         gradient.addColorStop(0, '#ff8800');
         gradient.addColorStop(1, '#ff0088');
         ctx.fillStyle = gradient;
 
-        // Draw modules (use fractional pixel sizes for consistent canvas dimensions)
         for (var r = 0; r < qr.size; r++) {
           for (var c = 0; c < qr.size; c++) {
             if (qr.matrix[r][c]) {
               var x = (c + quiet) * pixelSize;
               var y = (r + quiet) * pixelSize;
-              // Snap to pixel grid to avoid gaps
               ctx.fillRect(Math.floor(x), Math.floor(y),
                 Math.ceil(pixelSize), Math.ceil(pixelSize));
             }
           }
         }
 
-        // === Center logo ===
-        if (logoLoaded) {
-          var logoSize = Math.round(qrCanvasSize * 0.1);
-          var logoPadding = Math.round(logoSize * 0.05);
-          var bgSize = logoSize + logoPadding * 2;
-
-          // White circle background to clear QR modules behind logo
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(qrCanvasSize / 2, qrCanvasSize / 2, bgSize / 2, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Draw the vexillum logo centered
-          var lx = Math.round((qrCanvasSize - logoSize) / 2);
-          var ly = Math.round((qrCanvasSize - logoSize) / 2);
-          ctx.drawImage(logoImg, lx, ly, logoSize, logoSize);
-        }
-
-        // === Branded text below QR ===
-        var fontSize = Math.round(textHeight * 0.35);
+        // === Branded section below QR ===
         var fontName = fontReady ? 'Disorient' : 'Orbitron, monospace';
         ctx.font = fontSize + 'px ' + fontName;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        // Gradient text
         var textGradient = ctx.createLinearGradient(
           canvasWidth * 0.2, 0, canvasWidth * 0.8, 0
         );
@@ -511,11 +496,21 @@
         textGradient.addColorStop(1, '#ff0088');
         ctx.fillStyle = textGradient;
 
-        var textY = qrCanvasSize + textPadding + textHeight / 2;
-        ctx.fillText('COUNTRY CLUB XiV', canvasWidth / 2, textPadding * 1.5);
-        ctx.fillText('SECRET', canvasWidth / 2, textY - textPadding * 4.25);
-        ctx.fillText('UPSTATE LOCATION', canvasWidth / 2, textY - textPadding * 2.5);
-        ctx.fillText('MAY 21-25', canvasWidth / 2, textY);
+        var topTextStart = qrCanvasSize + pad;
+        for (var i = 0; i < topLines.length; i++) {
+          ctx.fillText(topLines[i], canvasWidth / 2, topTextStart + lineHeight * (i + 0.5));
+        }
+
+        var vexillumY = topTextStart + topTextHeight + gap;
+        if (logoLoaded) {
+          var vexillumX = Math.round((canvasWidth - vexillumSize) / 2);
+          ctx.drawImage(logoImg, vexillumX, vexillumY, vexillumSize, vexillumSize);
+        }
+
+        var bottomTextStart = vexillumY + vexillumSize + gap;
+        for (var j = 0; j < bottomLines.length; j++) {
+          ctx.fillText(bottomLines[j], canvasWidth / 2, bottomTextStart + lineHeight * (j + 0.5));
+        }
       }
 
       // ===== UI =====
