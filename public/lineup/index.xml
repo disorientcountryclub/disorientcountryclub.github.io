@@ -2,24 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lineup on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</title>
-    <link>https://disorientcountry.club/lineup/</link>
+    <link>http://localhost:1313/lineup/</link>
     <description>Recent content in Lineup on Disorient presents: COUNTRY CLUB XIV - PRESENCE AND THE ETERNAL NOW</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://disorientcountry.club/lineup/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/lineup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DJ Lineup</title>
-      <link>https://disorientcountry.club/lineup/djs/</link>
+      <link>http://localhost:1313/lineup/djs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://disorientcountry.club/lineup/djs/</guid>
-      <description>&lt;p&gt;You know what this is.&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://disorientcountry.club/get-involved&#34;&gt;Sign up to play here&lt;/a&gt;.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/lineup/djs/</guid>
+      <description>&lt;p&gt;You know what this is.&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/get-involved&#34;&gt;Sign up to play here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>VJ Lineup</title>
-      <link>https://disorientcountry.club/lineup/vjs/</link>
+      <link>http://localhost:1313/lineup/vjs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://disorientcountry.club/lineup/vjs/</guid>
-      <description>&lt;p&gt;Our VJs accompany the music with stunning visuals.&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://disorientcountry.club/get-involved&#34;&gt;Sign up to play here&lt;/a&gt;.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/lineup/vjs/</guid>
+      <description>&lt;p&gt;Our VJs accompany the music with stunning visuals.&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/get-involved&#34;&gt;Sign up to play here&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DIY</title>
+      <link>http://localhost:1313/lineup/diy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/lineup/diy/</guid>
+      <description>&lt;p&gt;Disorient DIY is a communal effort. We provide the location, and materials. You can also bring art supplies to use with others!&lt;/p&gt;&#xA;&lt;p&gt;We only require: you, and your creativity.&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;This year we will have:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;Heat press with dye sublimation designs (back by popular demand!)&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;Perler Beads&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;Solar Print&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;Draw Your Own Portrait&lt;/p&gt;&#xA;&lt;p&gt; &lt;/p&gt;&#xA;&lt;p&gt;(looking for help with) Airbrush body painting!&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -8,6 +8,8 @@ We invite you to bring your magic to plug it into the vortex. Disorient Country 
 
 [Get involved and register](/get-involved) art you'd like to bring!
 
+Or join us for our [DIY art sessions](/lineup/diy/)!
+
 {{< gallery >}}
 {{< img src="art/IMG_9656.JPEG" alt="Art at Country Club" >}}
 {{< img src="art/IMG_9720.JPEG" alt="Art at Country Club" >}}

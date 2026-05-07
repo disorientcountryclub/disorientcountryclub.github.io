@@ -1,6 +1,7 @@
 ---
 title: "VJ Lineup"
 venue: "Disorient Club House"
+weight: 2
 artists: []
   # - name: "THE SOURCE"
   # - name: "REBECCA NUVOLETTA"
@@ -22,4 +23,3 @@ Our VJs accompany the music with stunning visuals.
 &nbsp;
 
 [Sign up to play here](/get-involved).
-

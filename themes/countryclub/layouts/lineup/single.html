@@ -1,34 +1,31 @@
 {{ define "main" }}
 <div class="container">
-  <article class="lineup-content">
-    <header>
-      <h1>{{ .Title }}</h1>
-      {{ if .Params.venue }}
-        <p class="venue">{{ .Params.venue }}</p>
-      {{ end }}
-    </header>
-
-    {{ if .Content }}
-      <div class="lineup-intro">
-        {{ .Content }}
-      </div>
-    {{ end }}
-
-    {{ if .Params.artists }}
-      <div class="artists-list">
-        {{ range .Params.artists }}
-          <div class="artist-item">
-            <h3 class="artist-name">{{ .name }}</h3>
-            {{ if .setTime }}
-              <p class="set-time">{{ .setTime }}</p>
+    <article class="lineup-content">
+        <header>
+            <h1>{{ .Title }}</h1>
+            {{ if .Params.venue }}
+            <p class="venue">{{ .Params.venue }}</p>
+            {{ end }} {{ if .Params.hours}}
+            <p class="hours">Hours: {{ .Params.hours}}</p>
             {{ end }}
-            {{ if .bio }}
-              <p class="bio">{{ .bio }}</p>
+        </header>
+
+        {{ if .Content }}
+        <div class="lineup-intro">{{ .Content }}</div>
+        {{ end }} {{ if .Params.artists }}
+        <div class="artists-list">
+            {{ range .Params.artists }}
+            <div class="artist-item">
+                <h3 class="artist-name">{{ .name }}</h3>
+                {{ if .setTime }}
+                <p class="set-time">{{ .setTime }}</p>
+                {{ end }} {{ if .bio }}
+                <p class="bio">{{ .bio }}</p>
+                {{ end }}
+            </div>
             {{ end }}
-          </div>
+        </div>
         {{ end }}
-      </div>
-    {{ end }}
-  </article>
+    </article>
 </div>
 {{ end }}

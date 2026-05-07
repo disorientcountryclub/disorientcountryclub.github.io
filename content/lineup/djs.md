@@ -1,6 +1,7 @@
 ---
 title: "DJ Lineup"
 venue: "Disorient Club House"
+weight: 1
 artists: []
   # - name: "PIPPI SONGDROPPING"
   # - name: "FLARED BASS"
