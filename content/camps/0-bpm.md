@@ -20,6 +20,7 @@ featuring:
 - "The Lawful Truth"
 - "Thomas Watkiss"
 - "Reed Wixson"
+- "Jeremy Slater"
 
 ---
 

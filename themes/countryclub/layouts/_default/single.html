@@ -42,6 +42,7 @@
 
         <div class="content">{{ .Content }}</div>
 
+        {{ if .Params.featuring }}
         <section class="featuring-content">
             <h3 class="featuring">Featuring</h3>
             <ul class="featuring-list">
@@ -52,6 +53,7 @@
                 {{ end }}
             </ul>
         </ul>
+        {{ end }}
     </section>
 </div>
 {{ end }}
