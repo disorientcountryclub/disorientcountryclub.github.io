@@ -2,33 +2,27 @@
 title: "DJ Lineup"
 venue: "Disorient Club House"
 weight: 1
-artists: []
-  # - name: "PIPPI SONGDROPPING"
-  # - name: "FLARED BASS"
-  # - name: "TIM THE ENCHANTER"
-  # - name: "DJ JOEY HERNANDEZ"
-  # - name: "EZ ALMIGHTY"
-  # - name: "DANIMAL SOUND"
-  # - name: "FRIAR TUCK"
-  # - name: "&9"
-  # - name: "DA.RCO"
-  # - name: "TESSUB"
-  # - name: "TJ MCAU"
-  # - name: "XENO COOL"
-  # - name: "DEFKON"
-  # - name: "YANDL"
-  # - name: "NU SKY"
-  # - name: "THE BENZ MOTORWAGEN"
-  # - name: "VINTAGE"
-  # - name: "DJ ADRIAN LUXX"
-  # - name: "N8TRONICK"
-  # - name: "DOUGGIE STYLE"
-  # - name: "ORION KEYSER"
-  # - name: "BODY KITE"
+artists: 
+  - name: "EZ ALMIGHTY"
+  - name: "DANIMAL SOUND"
+  - name: "TIM THE ENCHANTER"
+  - name: "NU SKY"
+  - name: "DJ JOEY HERNANDO"
+  - name: "DIANA NC"
+  - name: "DOUGGIE STYLE"
+  - name: "FRIAR TUCK"
+  - name: "VINTAGE"
+  - name: "ORION KEYSER"
+  - name: "GOD"
+  - name: "COLLIN IN KIND"
+  - name: "DJ DURRY"
+  - name: "FELIS BEATUS"
+  - name: "AUDIUS"
+  - name: "TJ MCAU"
+  - name: "SLINKY"
+  - name: "WALLY WHATEVER"
+  - name: "&9"
+  - name: "N8TRONICK"
+  - name: "SERA SOLSTICE"
+  - name: "ADRIAN LUX"
 ---
-
-You know what this is.
-
-&nbsp;
-
-[Sign up to play here](/get-involved).
